@@ -1,14 +1,24 @@
 package Client;
+import Connection.Repository;
+import Entity.User;
 
-import Connection.Connection;
+import java.util.List;
 
 public class Client {
     public static void main(String[] args) {
-        List<User> users = Connection.ConnectionToSQL();
-        users.forEach(user -> System.out.println(users.toString()));
-        List<User> users = Connection.ConnectionToSQLGen(User.class);
+        Repository<User> repository = new Repository<>(User.class);
 
-        Connection<User> userRepo = new Connection<>(User.class);
-        List<User> users = userRepo.
+        List<User> users = repository.ConnectionToSQL(User.class);
+        users.forEach(user -> System.out.println(user.toString()));
+
+        repository.addObjectToDB(User.class,new User());
+ //       Repository.insertUser();
+//        Repository.deleteUser();
+//        Repository.updateUser();
+
+//        List<User> users = Repository.ConnectionToSQL();
+//        users.forEach(user -> System.out.println(users.toString()));
+
+
     }
 }
