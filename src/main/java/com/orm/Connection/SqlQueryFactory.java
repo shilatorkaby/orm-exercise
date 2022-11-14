@@ -35,7 +35,7 @@ public class SqlQueryFactory {
     }
 
     /**
-     *  Read Functionality
+     * Read Functionality
      */
     public static <T> String createFindAllQuery(Class<T> clz) {
         return "SELECT * FROM " + clz.getSimpleName().toLowerCase() + ";";
@@ -51,6 +51,7 @@ public class SqlQueryFactory {
         return query;
     }
 
+    // TODO: Update a single property of a single item (update email for user with id x)
     public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property,int id) {
         String tableName = clz.getSimpleName().toLowerCase();
         String query = "UPDATE " + tableName + " SET " + propertyName + " = " + property +
@@ -59,13 +60,14 @@ public class SqlQueryFactory {
     }
 
     /**
-     *  ADD Functionality
+     * ADD Functionality
      */
     // TODO: Add a single item to a table
     public static <T> String createAddSingleItemToTableQuery() {
         return null;
     }
 
+    // TODO: Update an entire item
     public static <T> String createUpdateItemQuery(Class<T> clz, T object,int id) {
         String tableName = clz.getSimpleName().toLowerCase() +"_data";
         String query = "UPDATE " + tableName + " SET ";
@@ -91,15 +93,29 @@ public class SqlQueryFactory {
 
 
     // TODO: Add multiple items
-    // TODO: Update a single property of a single item (update email for user with id x)
-    // TODO: Update an entire item
 
     /**
-     *  Delete Functionality
-      */
+     * Delete Functionality
+     */
     // TODO: Single item deletion by any property (delete user with email x)
+    public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + property + " LIMIT 1";
+        return query;
+    }
 
     // TODO Multiple item deletion by any property (delete all users called x)
-    // TODO Delete entire table (truncate)
+    public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + property;
+        return query;
+    }
 
+
+    // TODO Delete entire table (truncate)
+    public static <T> String createDeleteTableQuery(Class<T> clz) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "DROP TABLE " + tableName;
+        return query;
+    }
 }

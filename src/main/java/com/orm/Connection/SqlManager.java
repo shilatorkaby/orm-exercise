@@ -12,7 +12,7 @@ import java.util.List;
 public class SqlManager {
 
     public static <T> void createTable(Class<T> clz) {
-        try(java.sql.Connection con = ConnectionFacade.getConnection()) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             Statement stmt = con.createStatement();
             String query = SqlQueryFactory.createNewTableQuery(clz);
             stmt.execute(query);
@@ -57,7 +57,7 @@ public class SqlManager {
 
     private static <T> List<T> resultSetToList(Class<T> clz, ResultSet rs) throws SQLException {
         List<T> results = new ArrayList<>();
-        try{
+        try {
             while (rs.next()) {
                 Constructor<T> constructor = clz.getConstructor(null);
                 T item = constructor.newInstance();
@@ -69,15 +69,16 @@ public class SqlManager {
                 results.add(item);
             }
             return results;
-        }
-        catch (SQLException | InstantiationException | IllegalAccessException | InvocationTargetException e) {throw new SQLException("Result sets is empty");} catch (
+        } catch (SQLException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new SQLException("Result sets is empty");
+        } catch (
                 NoSuchMethodException e) {
-            throw new RuntimeException(e.getMessage()+"Error in class' constructor");
+            throw new RuntimeException(e.getMessage() + "Error in class' constructor");
         }
     }
 
     /**
-     *  ADD Functionality
+     * ADD Functionality
      */
     //TODO: Add a single item to a table
     public static <T> String createAddSingleItemToTableQuery() {
@@ -137,11 +138,43 @@ public class SqlManager {
 
 
     /**
-     *  Delete Functionality
+     * Delete Functionality
      */
     //TODO: Single item deletion by any property (delete user with email x)
+    public static <T> List<T> deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            String query = SqlQueryFactory.createDeleteSingleItemByPropertyQuery(clz, propertyName, property);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //TODO Multiple item deletion by any property (delete all users called x)
+    public static <T> List<T> deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            String query = SqlQueryFactory.createDeleteItemsByPropertyQuery(clz, propertyName, property);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //TODO Delete entire table (truncate)
+    public static <T> List<T> deleteTable(Class<T> clz) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            String query = SqlQueryFactory.createDeleteTableQuery(clz);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }
