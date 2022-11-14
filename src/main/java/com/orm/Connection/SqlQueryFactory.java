@@ -33,7 +33,7 @@ public class SqlQueryFactory {
     }
 
     /**
-     *  Read Functionality
+     * Read Functionality
      */
     public static <T> String createFindAllQuery(Class<T> clz) {
         return "SELECT * FROM " + clz.getSimpleName().toLowerCase() + ";";
@@ -50,7 +50,7 @@ public class SqlQueryFactory {
     }
 
     /**
-     *  ADD Functionality
+     * ADD Functionality
      */
     // TODO: Add a single item to a table
     public static <T> String createAddSingleItemToTableQuery() {
@@ -61,10 +61,27 @@ public class SqlQueryFactory {
     // TODO: Update an entire item
 
     /**
-     *  Delete Functionality
-      */
+     * Delete Functionality
+     */
     // TODO: Single item deletion by any property (delete user with email x)
+    public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + property + " LIMIT 1";
+        return query;
+    }
 
     // TODO Multiple item deletion by any property (delete all users called x)
+    public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + property;
+        return query;
+    }
+
+
     // TODO Delete entire table (truncate)
+    public static <T> String createDeleteTableQuery(Class<T> clz) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "DROP TABLE " + tableName;
+        return query;
+    }
 }
