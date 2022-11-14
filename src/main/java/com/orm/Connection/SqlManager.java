@@ -16,7 +16,7 @@ public class SqlManager {
             String query = SqlQueryFactory.createNewTableQuery(clz);
             stmt.execute(query);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
     }
 
@@ -82,10 +82,26 @@ public class SqlManager {
      * ADD Functionality
      */
     //TODO: Add a single item to a table
-    public static <T> String createAddSingleItemToTableQuery() {
-        return null;
+    public static <T> T addSingleItem(T item) {
+        addMultipleItems(item);
+        return item;
     }
+
     //TODO: Add multiple items
+    public static <T> T[] addMultipleItems(T... items) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            Statement stmt = con.createStatement();
+            for (T item : items) {
+                String query = SqlQueryFactory.createAddSingleItemToTableQuery(item);
+                stmt.execute(query);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return items;
+    }
+
+    //TODO: Update a single property of a single item (update email for user with id x)
 
     public static <T> T updatePropertyById(Class<T> clz, String propertyName, Object property,int id) {
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -97,6 +113,7 @@ public class SqlManager {
             throw new RuntimeException(e);
         }
     }
+
     //TODO: Update an entire item
     public static <T> T updateEntireItem(Class<T> clz, T object,int id) {
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -108,35 +125,6 @@ public class SqlManager {
             throw new RuntimeException(e);
         }
     }
-
-
-    //        public <T> void addObjectToDB(Class<T> clz,T object) {
-//            try{
-//
-//                //info - Connection is created successfully
-//                String query = "INSERT INTO "+tableName + " VALUES (";
-//
-//                Field[] declaredFields = clz.getDeclaredFields(); //list of fields
-//
-//
-//                for (Field field : declaredFields) {
-//                    object.getClass().getDeclaredField(field.getName());
-//                    field.setAccessible(true);
-//                    query += field.get(object);
-//                    query+=",";
-//                }
-//
-//                query = query.substring(0,query.length()-1)+')';
-//                System.out.println(query);
-//                connect.getStmt().executeUpdate(query);
-//                //stmt.executeUpdate("INSERT INTO Users " + "VALUES (4, 'haitham@gmail.com','Haitham', 'haitham1234', 4000 )");
-//            } catch (SQLException e) {
-//                throw new RuntimeException("Entity insertion was failed");
-//            } catch (NoSuchFieldException | IllegalAccessException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-
 
     /**
      * Delete Functionality
