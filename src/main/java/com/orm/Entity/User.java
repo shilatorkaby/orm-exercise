@@ -1,4 +1,4 @@
-package Entity;
+package com.orm.Entity;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.github.javafaker.Faker;
 
 public class User {
+
     int id;
     String name;
     String email;
@@ -66,37 +67,4 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
-
-
-
-
-//    public static List<User> ConnectionToSQL() {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/user_data", "root","");
-//
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery("select * from user_data");
-//            List<User> results = new ArrayList<>();
-//            while (rs.next()) {
-//                User user = new User();
-//                user.setId(rs.getInt("id"));
-//                user.setEmail(rs.getString("email"));
-//                user.setName(rs.getString("name"));
-//                user.setPassword(rs.getString("password"));
-//
-//                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-//                results.add(user);
-//
-//                con.close();
-//                return results;
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
-
-
-
 }
