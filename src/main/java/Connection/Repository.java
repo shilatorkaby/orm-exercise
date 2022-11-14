@@ -1,23 +1,23 @@
 package Connection;
-import java.io.IOException;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Repository<T> {
     private Class<T> clz;
+    private String tableName;
+
+    Connect connect = Connect.getInstance();
 
     public Repository(Class<T> clz) {
         this.clz = clz;
+        tableName=String.format("%s_data", clz.getSimpleName().toLowerCase());
     }
-
-
-    //insert object to database
-
 
 
         private static <T> List<T> resultSetToList(Class<T> clz,ResultSet rs) throws SQLException {
@@ -42,19 +42,11 @@ public class Repository<T> {
     }
 
         //Database to list of objects
-        public static <T> List<T> ConnectionToSQL(Class<T> clz) {
+        public <T> List<T> ConnectionToSQL(Class<T> clz) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String tableName=String.format("%s_data", clz.getSimpleName().toLowerCase());
-            java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+tableName, "root","");
-            if (con == null) {
-                throw new IOException("Database connection failed");
-            }
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from "+tableName);
+            ResultSet rs = connect.getStmt().executeQuery("select * from "+tableName);
             List<T> results=resultSetToList(clz,rs);
-            if (con != null)
-                con.close();
+
             return results;
         } catch (Exception e) {
             System.out.println(e);
@@ -62,82 +54,61 @@ public class Repository<T> {
         return null;
         }
 
+        public <T> T getItemById(Class<T> clz,int id)
+        {
+            try {
+                String query = "SELECT * FROM "+tableName +" WHERE id =" +id;
+                return resultSetToList(clz,connect.getStmt().executeQuery(query)).get(0);
 
-        public static <T> void addObjectToDB(Class<T> clz,T object) {
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String tableName = String.format("%s_data", clz.getSimpleName().toLowerCase());
-                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + tableName, "root", "");
-                //info - Connection is created successfully
-                Statement stmt = con.createStatement();
-                String query = "INSERT INTO "+tableName + "VALUES (";
-
-                Field[] declaredFields = clz.getDeclaredFields(); //list of fields
-
-
-                for (Field field : declaredFields) {
-                    object.getClass().getDeclaredField(field.getName());
-                    field.setAccessible(true);
-                    query += field.get(object);
-                    query+=",";
-                }
-                query = query.substring(0,query.length()-1)+')';
-                System.out.println(query);
-                //stmt.executeUpdate(query);
-                //stmt.executeUpdate("INSERT INTO Users " + "VALUES (4, 'haitham@gmail.com','Haitham', 'haitham1234', 4000 )");
-            }
-            catch (ClassNotFoundException e)
-            {
-                try {
-                    throw new ClassNotFoundException("Driver class loading was failed");
-                } catch (ClassNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
             } catch (SQLException e) {
-                throw new RuntimeException("Table Connection was failed");
-            } catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
+
+        }
+        public <T> List<T> getItemByProperty(Class<T> clz,String propertyName,Object property)
+        {
+            try {
+                String query = "SELECT * FROM "+tableName +
+                        " WHERE " +propertyName +" = "+property;
+                return resultSetToList(clz,connect.getStmt().executeQuery(query));
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
-    public static void deleteUser() {
-        try {
+//        public <T> void addObjectToDB(Class<T> clz,T object) {
+//            try{
+//
+//                //info - Connection is created successfully
+//                String query = "INSERT INTO "+tableName + " VALUES (";
+//
+//                Field[] declaredFields = clz.getDeclaredFields(); //list of fields
+//
+//
+//                for (Field field : declaredFields) {
+//                    object.getClass().getDeclaredField(field.getName());
+//                    field.setAccessible(true);
+//                    query += field.get(object);
+//                    query+=",";
+//                }
+//
+//                query = query.substring(0,query.length()-1)+')';
+//                System.out.println(query);
+//                connect.getStmt().executeUpdate(query);
+//                //stmt.executeUpdate("INSERT INTO Users " + "VALUES (4, 'haitham@gmail.com','Haitham', 'haitham1234', 4000 )");
+//            } catch (SQLException e) {
+//                throw new RuntimeException("Entity insertion was failed");
+//            } catch (NoSuchFieldException | IllegalAccessException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_ex", "root", "1234");
-            Statement stmt = con.createStatement();
-            String query = "delete from  Users " +
-                    "where id = 4";
-            stmt.executeUpdate(query);
-
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
 
     }
 
-    public static void updateUser() {
-        try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sql_ex", "root", "1234");
-            Statement stmt = con.createStatement();
-            String query = "update Users set Name ='Mohammad' " + "where id = 1";
-            stmt.executeUpdate(query);
-
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-
-
-
-    }
 
 
 
