@@ -1,5 +1,4 @@
 package com.orm.Connection;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -32,6 +31,19 @@ public class SqlManager {
         }
     }
 
+
+    // TODO: Need to add checking if list is empty
+    public static <T> List<T> findAll(Class<T> clz, String propertyName, Object property) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            String query = SqlQueryFactory.createItemByPropertyQuery(clz, propertyName, property);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static <T> T getItemById(Class<T> clz, int id) {
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createGetItemByIdQuery(clz, id);
@@ -43,17 +55,6 @@ public class SqlManager {
         }
     }
 
-    // TODO: Need to add checking if list is empty
-    public static <T> List<T> getItemByProperty(Class<T> clz, String propertyName, Object property) {
-        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
-            String query = SqlQueryFactory.createItemByPropertyQuery(clz, propertyName, property);
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private static <T> List<T> resultSetToList(Class<T> clz, ResultSet rs) throws SQLException {
         List<T> results = new ArrayList<>();
@@ -86,12 +87,12 @@ public class SqlManager {
     }
     //TODO: Add multiple items
 
-    public static <T> List<T> updatePropertyById(Class<T> clz, String propertyName, Object property,int id) {
+    public static <T> T updatePropertyById(Class<T> clz, String propertyName, Object property,int id) {
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createUpdateByIdQuery(clz, propertyName, property,id);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
+            return resultSetToList(clz, rs).get(0);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -165,12 +166,11 @@ public class SqlManager {
     }
 
     //TODO Delete entire table (truncate)
-    public static <T> List<T> deleteTable(Class<T> clz) {
+    public static <T> void deleteTable(Class<T> clz) {
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteTableQuery(clz);
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
+            stmt.executeQuery(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
