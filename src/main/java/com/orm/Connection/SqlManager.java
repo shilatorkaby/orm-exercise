@@ -85,7 +85,29 @@ public class SqlManager {
         return null;
     }
     //TODO: Add multiple items
-    //TODO: Update a single property of a single item (update email for user with id x)
+
+    public static <T> List<T> updatePropertyById(Class<T> clz, String propertyName, Object property,int id) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            String query = SqlQueryFactory.createUpdateByIdQuery(clz, propertyName, property,id);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //TODO: Update an entire item
+    public static <T> T updateEntireItem(Class<T> clz, T object,int id) {
+        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
+            String query = SqlQueryFactory.createUpdateItemQuery(clz,object,id);
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            return object;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     //        public <T> void addObjectToDB(Class<T> clz,T object) {
 //            try{
@@ -114,7 +136,6 @@ public class SqlManager {
 //            }
 //        }
 
-    //TODO: Update an entire item
 
     /**
      * Delete Functionality

@@ -49,6 +49,7 @@ public class SqlQueryFactory {
         return query;
     }
 
+
     /**
      * ADD Functionality
      */
@@ -56,9 +57,44 @@ public class SqlQueryFactory {
     public static <T> String createAddSingleItemToTableQuery() {
         return null;
     }
+
     // TODO: Add multiple items
-    // TODO: Update a single property of a single item (update email for user with id x)
+
+
+    /**
+     * UPDATE Functionality
+     */
     // TODO: Update an entire item
+    public static <T> String createUpdateItemQuery(Class<T> clz, T object,int id) {
+        String tableName = clz.getSimpleName().toLowerCase() +"_data";
+        String query = "UPDATE " + tableName + " SET ";
+            Field[] declaredFields = clz.getDeclaredFields(); //list of fields
+            for (Field field : declaredFields) {
+                field.setAccessible(true); //turn to public
+                query += (field.getName() + " = ");
+                try {
+                    Object value = field.get(object);
+                    if (value instanceof String)
+                        query += ("\'"+value+"\'" + ",");
+                    else
+                        query += (value + ",");
+
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Field value was empty");
+                }
+            }
+            query = query.substring(0,query.length()-1);
+            query += (" WHERE id = " +id);
+            return query+";";
+    }
+
+    // TODO: Update a single property of a single item (update email for user with id x)
+    public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property,int id) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "UPDATE " + tableName + " SET " + propertyName + " = " + property +
+                "WHERE id = " +id;
+        return query;
+    }
 
     /**
      * Delete Functionality
