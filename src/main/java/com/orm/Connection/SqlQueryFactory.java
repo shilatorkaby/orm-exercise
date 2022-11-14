@@ -6,9 +6,7 @@ import java.lang.reflect.Field;
 
 public class SqlQueryFactory {
 
-        public static<T>String tableName(Class<T> clz) { return(clz.getSimpleName().toLowerCase());}
-
-        public static <T> String createNewTableQuery(Class<T> clz) {
+    public static <T> String createNewTableQuery(Class<T> clz) {
         StringBuilder createTableQuery = new StringBuilder("CREATE TABLE ");
         createTableQuery.append(clz.getSimpleName().toLowerCase());
         createTableQuery.append(" (\n");
@@ -51,13 +49,6 @@ public class SqlQueryFactory {
         return query;
     }
 
-    // TODO: Update a single property of a single item (update email for user with id x)
-    public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property,int id) {
-        String tableName = clz.getSimpleName().toLowerCase();
-        String query = "UPDATE " + tableName + " SET " + propertyName + " = " + property +
-                "WHERE id = " +id;
-        return query;
-    }
 
     /**
      * ADD Functionality
@@ -67,6 +58,12 @@ public class SqlQueryFactory {
         return null;
     }
 
+    // TODO: Add multiple items
+
+
+    /**
+     * UPDATE Functionality
+     */
     // TODO: Update an entire item
     public static <T> String createUpdateItemQuery(Class<T> clz, T object,int id) {
         String tableName = clz.getSimpleName().toLowerCase() +"_data";
@@ -91,8 +88,13 @@ public class SqlQueryFactory {
             return query+";";
     }
 
-
-    // TODO: Add multiple items
+    // TODO: Update a single property of a single item (update email for user with id x)
+    public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property,int id) {
+        String tableName = clz.getSimpleName().toLowerCase();
+        String query = "UPDATE " + tableName + " SET " + propertyName + " = " + property +
+                "WHERE id = " +id;
+        return query;
+    }
 
     /**
      * Delete Functionality
