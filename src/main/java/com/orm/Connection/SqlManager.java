@@ -1,6 +1,5 @@
 package com.orm.Connection;
 
-import com.orm.Utils.ErrorHandlling;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,8 +17,6 @@ public class SqlManager {
 
     public static <T> void createTable(Class<T> clz) {
         logger.info("Start Creating Table");
-        ErrorHandlling.validate(clz, logger);
-
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             Statement stmt = con.createStatement();
             String query = SqlQueryFactory.createNewTableQuery(clz);
@@ -34,8 +31,6 @@ public class SqlManager {
 
     public static <T> List<T> findAll(Class<T> clz) {
         logger.info("start Find All");
-        ErrorHandlling.validate(clz, logger);
-
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             Statement stmt = con.createStatement();
             String query = SqlQueryFactory.createFindAllQuery(clz);
@@ -53,7 +48,6 @@ public class SqlManager {
     // TODO: Need to add checking if list is empty
     public static <T> List<T> findAll(Class<T> clz, String propertyName, Object property) {
         logger.info("start Find All according to property name and value");
-        ErrorHandlling.validate(clz, propertyName, property, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createItemByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
@@ -69,7 +63,6 @@ public class SqlManager {
 
     public static <T> T getItemById(Class<T> clz, int id) {
         logger.info("start getting item by it's id");
-        ErrorHandlling.validate(clz, id, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createGetItemByIdQuery(clz, id);
             Statement stmt = con.createStatement();
@@ -115,7 +108,6 @@ public class SqlManager {
     //TODO: Add a single item to a table
     public static <T> T addSingleItem(T item) {
         logger.info("start adding single item");
-        ErrorHandlling.validate(item, logger);
         addMultipleItems(item);
         return item;
     }
@@ -123,7 +115,6 @@ public class SqlManager {
     //TODO: Add multiple items
     public static <T> T[] addMultipleItems(T... items) {
         logger.info("start adding multiple items");
-        ErrorHandlling.validate(items, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             Statement stmt = con.createStatement();
             for (T item : items) {
@@ -142,7 +133,6 @@ public class SqlManager {
 
     public static <T> T updatePropertyById(Class<T> clz, String propertyName, Object property, int id) {
         logger.info("start updating property by id");
-        ErrorHandlling.validate(clz, propertyName, property, id, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createUpdateByIdQuery(clz, propertyName, property, id);
             Statement stmt = con.createStatement();
@@ -159,7 +149,6 @@ public class SqlManager {
     //TODO: Update an entire item
     public static <T> T updateEntireItem(Class<T> clz, T object, int id) {
         logger.info("start update entire item");
-        ErrorHandlling.validate(clz, object, id, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createUpdateItemQuery(clz, object, id);
             Statement stmt = con.createStatement();
@@ -177,7 +166,6 @@ public class SqlManager {
      */
     //TODO: Single item deletion by any property (delete user with email x)
     public static <T> List<T> deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
-        ErrorHandlling.validate(clz, propertyName, property, logger);
         logger.info("start deleting single item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteSingleItemByPropertyQuery(clz, propertyName, property);
@@ -194,7 +182,6 @@ public class SqlManager {
     //TODO Multiple item deletion by any property (delete all users called x)
     public static <T> List<T> deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting item by property");
-        ErrorHandlling.validate(clz, propertyName, property, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteItemsByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
@@ -210,7 +197,6 @@ public class SqlManager {
     //TODO Delete entire table (truncate)
     public static <T> void deleteTable(Class<T> clz) {
         logger.info("start deleting table");
-        ErrorHandlling.validate(clz, logger);
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteTableQuery(clz);
             Statement stmt = con.createStatement();
