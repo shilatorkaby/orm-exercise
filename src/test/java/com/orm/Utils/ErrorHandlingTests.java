@@ -72,7 +72,4 @@ public class ErrorHandlingTests<T> {
         assertThrows(Exception.class,() -> ErrorHandling.validatePropertyName("",logger));
     }
 
-
-
-
 }

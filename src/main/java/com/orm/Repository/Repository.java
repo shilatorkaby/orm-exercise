@@ -5,6 +5,7 @@ import com.orm.Utils.ErrorHandling;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Repository<T> {
@@ -14,10 +15,14 @@ public class Repository<T> {
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
-        SqlManager.createTable(clz);
-        ErrorHandling.validate(clz, logger);
-        if (!SqlManager.checkIfTableExists(clz)) {
+        try
+        {
             SqlManager.createTable(clz);
+            ErrorHandling.validate(clz, logger);
+            logger.info("Table was created");
+        }
+        catch (RuntimeException e) {
+            logger.info("Table already exists");
         }
     }
 
@@ -37,7 +42,6 @@ public class Repository<T> {
     }
 
     public void save(T t) {
-
         ErrorHandling.validate(t, logger);
         SqlManager.addSingleItem(t);
     }

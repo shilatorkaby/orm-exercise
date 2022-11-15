@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import com.github.javafaker.Faker;
+//import com.github.javafaker.Name;
 
 public class User {
 
     int id;
-    String name;
+    Name name;
     String email;
     String password;
 
@@ -19,9 +20,9 @@ public class User {
 
     public User() {
         id = ThreadLocalRandom.current().nextInt(100000000,999999999);
-        name = new Faker().name().firstName();
-        email = name+ ThreadLocalRandom.current().nextInt(100, 299 + 1)+"@gmail.com";
-        password = name+ ThreadLocalRandom.current().nextInt(10000, 99999);
+        name = new Name("shilat","orkaby");//new Faker().name().firstName();
+        email = name.firstName+ ThreadLocalRandom.current().nextInt(100, 299 + 1)+"@gmail.com";
+        password = name.firstName+ ThreadLocalRandom.current().nextInt(10000, 99999);
 
     }
 
@@ -51,12 +52,12 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return name.firstName;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Override
     public String toString() {

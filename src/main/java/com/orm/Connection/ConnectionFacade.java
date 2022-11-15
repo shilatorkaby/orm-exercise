@@ -8,9 +8,9 @@ import java.sql.*;
 public class ConnectionFacade {
     private static Logger logger = LogManager.getLogger(ConnectionFacade.class);
 
-    private static final String DATA_BASE = "sql_ex";
+    private static final String DATA_BASE = "user_data";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "";
 
     public static java.sql.Connection getConnection() {
         try {

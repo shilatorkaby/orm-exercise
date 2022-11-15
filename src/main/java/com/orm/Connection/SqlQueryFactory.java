@@ -1,5 +1,6 @@
 package com.orm.Connection;
 
+import com.google.gson.Gson;
 import com.orm.Utils.JavaToSqlTypeMapper;
 
 import java.lang.reflect.Field;
@@ -81,6 +82,8 @@ public class SqlQueryFactory {
                 Object o = declaredFields[i].get(t);
                 if (o instanceof String) {
                     values.append(String.format("\'%s\'", o));
+                } else if (JavaToSqlTypeMapper.nonPrimitiveType(o.getClass().getSimpleName())) {
+                    values.append("'" + new Gson().toJson(o) + "'");
                 } else {
                     values.append(o);
                 }
