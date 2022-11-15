@@ -14,7 +14,9 @@ public class Repository<T> {
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandlling.validate(clz, logger);
-        SqlManager.createTable(clz);
+        if (!SqlManager.checkIfTableExists(clz)) {
+            SqlManager.createTable(clz);
+        }
     }
 
     public List<T> findAll() {

@@ -15,6 +15,18 @@ public class SqlQueryFactory {
         return createTableQuery.toString();
     }
 
+    public static <T> String checkIfTableExistsQuery(Class<T> clz) {
+        StringBuilder checkTableQuery = new StringBuilder(
+                "SELECT EXISTS( " +
+                        "SELECT * FROM information_schema.tables " +
+                        "WHERE table_schema = ' ");
+        checkTableQuery.append(ConnectionFacade.getDataBase());
+        checkTableQuery.append("' AND table_name = '");
+        checkTableQuery.append(clz.getSimpleName().toLowerCase());
+        checkTableQuery.append(" ');");
+        return checkTableQuery.toString();
+    }
+
     public static <T> String mapClassToSqlColumn(Class<T> clz) {
         StringBuilder sqlColumns = new StringBuilder();
 
@@ -45,7 +57,8 @@ public class SqlQueryFactory {
 
     public static <T> String createItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
-        String query = "SELECT * FROM " + tableName + " WHERE " + propertyName + " = " + property;
+        String stringProperty = convertIfString(property);
+        String query = "SELECT * FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty;
         return query;
     }
 
@@ -62,7 +75,7 @@ public class SqlQueryFactory {
     public static <T> String getValues(T t) {
         StringBuilder values = new StringBuilder(" VALUES (");
         Field[] declaredFields = t.getClass().getDeclaredFields();
-        for (int i = 0; i< declaredFields.length; i++) {
+        for (int i = 0; i < declaredFields.length; i++) {
             declaredFields[i].setAccessible(true);
             try {
                 Object o = declaredFields[i].get(t);
@@ -89,34 +102,35 @@ public class SqlQueryFactory {
      * UPDATE Functionality
      */
     // TODO: Update an entire item
-    public static <T> String createUpdateItemQuery(Class<T> clz, T object,int id) {
-        String tableName = clz.getSimpleName().toLowerCase() +"_data";
+    public static <T> String createUpdateItemQuery(Class<T> clz, T object, int id) {
+        String tableName = clz.getSimpleName().toLowerCase() + "_data";
         String query = "UPDATE " + tableName + " SET ";
-            Field[] declaredFields = clz.getDeclaredFields(); //list of fields
-            for (Field field : declaredFields) {
-                field.setAccessible(true); //turn to public
-                query += (field.getName() + " = ");
-                try {
-                    Object value = field.get(object);
-                    if (value instanceof String)
-                        query += ("\'"+value+"\'" + ",");
-                    else
-                        query += (value + ",");
+        Field[] declaredFields = clz.getDeclaredFields(); //list of fields
+        for (Field field : declaredFields) {
+            field.setAccessible(true); //turn to public
+            query += (field.getName() + " = ");
+            try {
+                Object value = field.get(object);
+                if (value instanceof String)
+                    query += ("\'" + value + "\'" + ",");
+                else
+                    query += (value + ",");
 
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException("Field value was empty");
-                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Field value was empty");
             }
-            query = query.substring(0,query.length()-1);
-            query += (" WHERE id = " +id);
-            return query+";";
+        }
+        query = query.substring(0, query.length() - 1);
+        query += (" WHERE id = " + id);
+        return query + ";";
     }
 
     // TODO: Update a single property of a single item (update email for user with id x)
-    public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property,int id) {
+    public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property, int id) {
         String tableName = clz.getSimpleName().toLowerCase();
-        String query = "UPDATE " + tableName + " SET " + propertyName + " = " + property +
-                "WHERE id = " +id;
+        String stringProperty = convertIfString(property);
+        String query = "UPDATE " + tableName + " SET " + propertyName + " = " + stringProperty +
+                "WHERE id = " + id;
         return query;
     }
 
@@ -126,14 +140,16 @@ public class SqlQueryFactory {
     // TODO: Single item deletion by any property (delete user with email x)
     public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
-        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + property + " LIMIT 1";
+        String stringProperty = convertIfString(property);
+        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty + " LIMIT 1";
         return query;
     }
 
     // TODO Multiple item deletion by any property (delete all users called x)
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
-        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + property;
+        String stringProperty = convertIfString(property);
+        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty;
         return query;
     }
 
@@ -143,5 +159,15 @@ public class SqlQueryFactory {
         String tableName = clz.getSimpleName().toLowerCase();
         String query = "DROP TABLE " + tableName;
         return query;
+    }
+
+    private static String convertIfString(Object obj) {
+        if (obj instanceof String) {
+            return "'" + obj + "'";
+        } else {
+            return obj.toString();
+        }
+
+
     }
 }
