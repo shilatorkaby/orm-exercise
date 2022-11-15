@@ -1,11 +1,14 @@
 package com.orm.Repository;
 
-import com.orm.Entity.Car;
 import com.orm.Entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +31,7 @@ public class RepositoryTests {
     @AfterEach
     void after() {
 
-//        repo.deleteTable();
+        repo.deleteTable();
     }
 
     @Test
@@ -45,9 +48,20 @@ public class RepositoryTests {
 
     @Test
     void findAll_RightPropertyType_Work() {
+        repo.deleteTable();
+        Repository<User> repoTest = new Repository<>(User.class);
+
+        User user1 = new User();
+        User user2 = new User();
+        repoTest.save(user2);
+        repoTest.save(user1);
+
+        List<User> userList = new ArrayList<User>(Arrays.asList(user2, user1));
+
 
 //        assertDoesNotThrow(() -> repo.findAll());
-        assertEquals(2, repo.findAll().size());
+        assertEquals(userList.toString(), repoTest.findAll().toString());
+        repoTest.deleteTable();
 
     }
 
@@ -62,18 +76,18 @@ public class RepositoryTests {
     void findAllWithParam_RightPropertyType_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
 
-        assertEquals(1, repo.findAll("id", 1).size());
+        assertEquals(user.toString(), repo.findAll("id", 1).get(0).toString());
     }
 
     @Test
     void findAllWithParam_WrongPropertyName_Exception() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
 
@@ -84,19 +98,18 @@ public class RepositoryTests {
     void getItemById_RightId_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
 
-        assertDoesNotThrow(() -> repo.getItemById(1));
-//        assertEquals(1, repo.getItemById(1).);
+        assertEquals(user.toString(), repo.getItemById(1).toString());
     }
 
     @Test
     void getItemById_WrongId_Exception() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
         assertThrows(Exception.class, () -> repo.getItemById(2));
@@ -105,7 +118,10 @@ public class RepositoryTests {
     @Test
     void saveSingleItem_RightItem_Work() {
         User user = new User();
+        user.setId(1);
+
         assertDoesNotThrow(() -> repo.save(user));
+        assertEquals(user.toString(), repo.getItemById(1).toString());
     }
 
     @Test
@@ -134,11 +150,10 @@ public class RepositoryTests {
     void updatePropertyById_RightParams_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
         user.setId(1);
         repo.save(user);
 
-        assertDoesNotThrow(() -> repo.updatePropertyById("name", "Otobek", 1));
+        assertDoesNotThrow(() -> repo.updatePropertyById("email", "khader@gmail.com", 1));
     }
 
     @Test
@@ -149,7 +164,7 @@ public class RepositoryTests {
     void updateItem_RightItemAndId_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
         User newUser = new User();
@@ -166,7 +181,7 @@ public class RepositoryTests {
     void deleteOneItemByProperty_RightParams_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
 
@@ -177,7 +192,7 @@ public class RepositoryTests {
     void deleteOneItemByProperty_WrongPropertyName_Exception() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setName("Khader");
+//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
 
@@ -188,13 +203,13 @@ public class RepositoryTests {
     void deleteItemsByProperty_RightParams_Work() {
         User user1 = new User();
         user1.setEmail("khader@gmail.com");
-        user1.setName("Khader");
+//        user1.setName("Khader");
         user1.setId(1);
         repo.save(user1);
 
         User user2 = new User();
         user2.setEmail("khsader@gmail.com");
-        user2.setName("Khader");
+//        user2.setName("Khader");
         user2.setId(2);
         repo.save(user2);
 
@@ -206,13 +221,13 @@ public class RepositoryTests {
 
         User user1 = new User();
         user1.setEmail("khader@gmail.com");
-        user1.setName("Khader");
+//        user1.setName("Khader");
         user1.setId(1);
         repo.save(user1);
 
         User user2 = new User();
         user2.setEmail("khsader@gmail.com");
-        user2.setName("Khader");
+//        user2.setName("Khader");
         user2.setId(2);
         repo.save(user2);
 

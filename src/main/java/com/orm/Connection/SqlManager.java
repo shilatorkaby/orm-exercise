@@ -120,9 +120,9 @@ public class SqlManager {
 //                    System.out.println(new Gson().fromJson(rs.getObject(field.getName()), new User()));
                     field.set(item, rs.getObject(field.getName()));
 
-                    results.add(item);
-                }
 
+                }
+                results.add(item);
             }
 
         } catch (SQLException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -134,7 +134,6 @@ public class SqlManager {
         }
         return results;
     }
-
 
 
     /**
@@ -201,15 +200,15 @@ public class SqlManager {
      * Delete Functionality
      */
     //TODO: Single item deletion by any property (delete user with email x)
-    public static <T> void deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
+    public static <T> List<T> deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting single item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteSingleItemByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting single item by property query");
             stmt.execute(query);
-//            ResultSet rs = stmt.executeQuery(query);
-//            return resultSetToList(clz, rs);
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteSingleItemByProperty");
             throw new RuntimeException(e);
@@ -217,14 +216,14 @@ public class SqlManager {
     }
 
     //TODO Multiple item deletion by any property (delete all users called x)
-    public static <T> void deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
+    public static <T> List<T> deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteItemsByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting item by property query");
-            stmt.execute(query);
-
+            ResultSet rs = stmt.executeQuery(query);
+            return resultSetToList(clz, rs);
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteItemsByProperty");
             throw new RuntimeException(e);
