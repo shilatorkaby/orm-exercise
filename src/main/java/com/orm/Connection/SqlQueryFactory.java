@@ -1,5 +1,6 @@
 package com.orm.Connection;
 
+import com.google.gson.Gson;
 import com.orm.Utils.JavaToSqlTypeMapper;
 
 import java.lang.reflect.Field;
@@ -81,6 +82,8 @@ public class SqlQueryFactory {
                 Object o = declaredFields[i].get(t);
                 if (o instanceof String) {
                     values.append(String.format("\'%s\'", o));
+                } else if (JavaToSqlTypeMapper.nonPrimitiveType(o.getClass().getSimpleName())) {
+                    values.append("'" + new Gson().toJson(o) + "'");
                 } else {
                     values.append(o);
                 }
@@ -112,7 +115,7 @@ public class SqlQueryFactory {
             try {
                 Object value = field.get(object);
                 if (value instanceof String)
-                    query += ("\'" + value + "\'" + ",");
+                    query += ("'" + value + "'" + ",");
                 else
                     query += (value + ",");
 
@@ -149,8 +152,7 @@ public class SqlQueryFactory {
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
-        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty;
-        return query;
+        return "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty;
     }
 
 
