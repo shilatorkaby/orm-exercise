@@ -22,7 +22,7 @@ public class SqlQueryFactory {
 
         for (int i = 0; i < declaredFields.length; i++) {
             String column = declaredFields[i].getName();
-            String type = declaredFields[i].getType().getSimpleName();
+            String type = declaredFields[i].getType().getName();
             String sqlType = JavaToSqlTypeMapper.mapJavaFieldToSql(type);
             sqlColumns.append(column + " " + sqlType);
             if (i != declaredFields.length - 1) {
