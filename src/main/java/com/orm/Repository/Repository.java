@@ -15,13 +15,11 @@ public class Repository<T> {
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
-        try
-        {
+        try {
             SqlManager.createTable(clz);
             ErrorHandling.validate(clz, logger);
             logger.info("Table was created");
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             logger.info("Table already exists");
         }
     }
@@ -57,12 +55,12 @@ public class Repository<T> {
         return SqlManager.getItemById(this.clz, id);
     }
 
-    public T updatePropertyById(String propertyName, Object property, int id) {
+    public int updatePropertyById(String propertyName, Object property, int id) {
         ErrorHandling.validate(clz, propertyName, property, id, logger);
         return SqlManager.updatePropertyById(this.clz, propertyName, property, id);
     }
 
-    public T updateItem(T object, int id) {
+    public int updateItem(T object, int id) {
         ErrorHandling.validate(clz, object, id, logger);
         return SqlManager.updateEntireItem(this.clz, object, id);
     }

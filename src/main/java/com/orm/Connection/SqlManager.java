@@ -165,16 +165,16 @@ public class SqlManager {
 
     //TODO: Update a single property of a single item (update email for user with id x)
 
-    public static <T> T updatePropertyById(Class<T> clz, String propertyName, Object property, int id) {
+    public static <T> int updatePropertyById(Class<T> clz, String propertyName, Object property, int id) {
         logger.info("start updating property by id");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createUpdateByIdQuery(clz, propertyName, property, id);
             Statement stmt = con.createStatement();
             logger.info("executing updating property by id query");
-            ResultSet rs = stmt.executeQuery(query);
-            List<T> resList = resultSetToList(clz, rs);
-            logger.info("result is generated " + resList.get(0));
-            return resList.get(0);
+            int rs = stmt.executeUpdate(query);
+
+            logger.info("updated in row" + rs);
+            return rs;
         } catch (SQLException e) {
             logger.error("Sql Exception in updatePrpertyById");
             throw new RuntimeException(e);
@@ -182,14 +182,15 @@ public class SqlManager {
     }
 
     //TODO: Update an entire item
-    public static <T> T updateEntireItem(Class<T> clz, T object, int id) {
+    public static <T> int updateEntireItem(Class<T> clz, T object, int id) {
         logger.info("start update entire item");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createUpdateItemQuery(clz, object, id);
             Statement stmt = con.createStatement();
             logger.info("executing updating entire item query");
-            stmt.execute(query);
-            return object;
+            int rs = stmt.executeUpdate(query);
+            logger.info("updated in row" + rs);
+            return rs;
         } catch (SQLException e) {
             logger.error("Sql Exception in updateEntireItem");
             throw new RuntimeException(e);

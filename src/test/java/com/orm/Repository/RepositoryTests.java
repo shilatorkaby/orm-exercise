@@ -146,14 +146,21 @@ public class RepositoryTests {
     }
 
     @Test
-        ///not working
     void updatePropertyById_RightParams_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-        user.setId(1);
+        user.setId(10);
         repo.save(user);
 
-        assertDoesNotThrow(() -> repo.updatePropertyById("email", "khader@gmail.com", 1));
+        repo.updatePropertyById("email", "what@gmail.com", 10);
+
+        User updatedUser = new User();
+        updatedUser.setName(user.getName());
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setEmail("what@gmail.com");
+        updatedUser.setId(10);
+
+        assertEquals(updatedUser.toString(), repo.getItemById(10).toString());
     }
 
     @Test
@@ -163,14 +170,18 @@ public class RepositoryTests {
     @Test
     void updateItem_RightItemAndId_Work() {
         User user = new User();
-        user.setEmail("khader@gmail.com");
-//        user.setName("Khader");
-        user.setId(1);
+        user.setId(10);
         repo.save(user);
-        User newUser = new User();
-        repo.save(newUser);
 
-        assertDoesNotThrow(() -> repo.updateItem(newUser, 1));
+        User updatedUser = new User();
+        updatedUser.setName("khader");
+        updatedUser.setPassword("khaderPass");
+        updatedUser.setEmail("what@gmail.com");
+        updatedUser.setId(10);
+
+        repo.updateItem(updatedUser, 10);
+
+        assertEquals(updatedUser.toString(), repo.getItemById(10).toString());
     }
 
     @Test
