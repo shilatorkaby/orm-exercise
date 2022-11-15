@@ -144,7 +144,7 @@ public class SqlQueryFactory {
     public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
-        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty + " LIMIT 1";
+        String query = "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty + " LIMIT 1";
         return query;
     }
 
