@@ -14,9 +14,9 @@ public class Repository<T> {
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
-        SqlManager.createTable(clz);
-        ErrorHandling.validate(clz, logger);
+        logger.info("class is " + clz);
         if (!SqlManager.checkIfTableExists(clz)) {
+            logger.info("creating Table");
             SqlManager.createTable(clz);
         }
     }
@@ -63,14 +63,14 @@ public class Repository<T> {
         return SqlManager.updateEntireItem(this.clz, object, id);
     }
 
-    public List<T> deleteOneItemByProperty(String propertyName, Object property) {
+    public void deleteOneItemByProperty(String propertyName, Object property) {
         ErrorHandling.validate(clz, propertyName, property, logger);
-        return SqlManager.deleteSingleItemByProperty(this.clz, propertyName, property);
+        SqlManager.deleteSingleItemByProperty(this.clz, propertyName, property);
     }
 
-    public List<T> deleteItemsByProperty(String propertyName, Object property) {
+    public void deleteItemsByProperty(String propertyName, Object property) {
         ErrorHandling.validate(clz, propertyName, property, logger);
-        return SqlManager.deleteItemsByProperty(this.clz, propertyName, property);
+        SqlManager.deleteItemsByProperty(this.clz, propertyName, property);
     }
 
     public void deleteTable() {

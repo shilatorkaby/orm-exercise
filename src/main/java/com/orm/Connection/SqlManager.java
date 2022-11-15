@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SqlManager {
@@ -36,14 +37,16 @@ public class SqlManager {
             Statement stmt = con.createStatement();
             String query = SqlQueryFactory.checkIfTableExistsQuery(clz);
             logger.info("start executing query");
-            boolean res = stmt.execute(query);
+            ResultSet res = stmt.executeQuery(query);
             String tableName = clz.getSimpleName().toLowerCase();
-            if (res) {
+            res.next();
+
+            if (res.getInt(1) != 0) {
                 logger.info("the table " + tableName + " does exists");
             } else {
                 logger.info("the table " + tableName + "doesn't exists");
             }
-            return res;
+            return res.getInt(1) != 0;
         } catch (SQLException e) {
             logger.error("Sql Exception in checkingIfTableExists table");
             throw new RuntimeException(e);
@@ -57,8 +60,9 @@ public class SqlManager {
             String query = SqlQueryFactory.createFindAllQuery(clz);
             logger.info("start executing query");
             ResultSet rs = stmt.executeQuery(query);
-            logger.info("result is generated " + rs);
-            return resultSetToList(clz, rs);
+            List<T> resList = resultSetToList(clz, rs);
+            logger.info("result is generated " + resList);
+            return resList;
         } catch (SQLException e) {
             logger.error("Sql Exception in creating table");
             throw new RuntimeException(e);
@@ -74,8 +78,9 @@ public class SqlManager {
             Statement stmt = con.createStatement();
             logger.info("start executing query");
             ResultSet rs = stmt.executeQuery(query);
-            logger.info("result is generated " + rs);
-            return resultSetToList(clz, rs);
+            List<T> resList = resultSetToList(clz, rs);
+            logger.info("result is generated " + resList);
+            return resList;
         } catch (SQLException e) {
             logger.error("Sql Exception in findingAll");
             throw new RuntimeException(e);
@@ -89,8 +94,9 @@ public class SqlManager {
             Statement stmt = con.createStatement();
             logger.info("start executing query");
             ResultSet rs = stmt.executeQuery(query);
-            logger.info("result is generated " + rs);
-            return resultSetToList(clz, rs).get(0);
+            List<T> resList = resultSetToList(clz, rs);
+            logger.info("result is generated " + resList.get(0));
+            return resList.get(0);
         } catch (SQLException e) {
             logger.error("Sql Exception in getItemById");
             throw new RuntimeException(e);
@@ -159,8 +165,9 @@ public class SqlManager {
             Statement stmt = con.createStatement();
             logger.info("executing updating property by id query");
             ResultSet rs = stmt.executeQuery(query);
-            logger.info("result is generated " + rs);
-            return resultSetToList(clz, rs).get(0);
+            List<T> resList = resultSetToList(clz, rs);
+            logger.info("result is generated " + resList.get(0));
+            return resList.get(0);
         } catch (SQLException e) {
             logger.error("Sql Exception in updatePrpertyById");
             throw new RuntimeException(e);
@@ -186,14 +193,15 @@ public class SqlManager {
      * Delete Functionality
      */
     //TODO: Single item deletion by any property (delete user with email x)
-    public static <T> List<T> deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
+    public static <T> void deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting single item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteSingleItemByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting single item by property query");
-            ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
+            stmt.execute(query);
+//            ResultSet rs = stmt.executeQuery(query);
+//            return resultSetToList(clz, rs);
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteSingleItemByProperty");
             throw new RuntimeException(e);
@@ -201,14 +209,14 @@ public class SqlManager {
     }
 
     //TODO Multiple item deletion by any property (delete all users called x)
-    public static <T> List<T> deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
+    public static <T> void deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteItemsByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting item by property query");
-            ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
+            stmt.execute(query);
+
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteItemsByProperty");
             throw new RuntimeException(e);

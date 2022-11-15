@@ -17,13 +17,12 @@ public class SqlQueryFactory {
 
     public static <T> String checkIfTableExistsQuery(Class<T> clz) {
         StringBuilder checkTableQuery = new StringBuilder(
-                "SELECT EXISTS( " +
-                        "SELECT * FROM information_schema.tables " +
-                        "WHERE table_schema = ' ");
+                "SELECT count(*) FROM information_schema.tables " +
+                        "WHERE table_schema = '");
         checkTableQuery.append(ConnectionFacade.getDataBase());
         checkTableQuery.append("' AND table_name = '");
         checkTableQuery.append(clz.getSimpleName().toLowerCase());
-        checkTableQuery.append(" ');");
+        checkTableQuery.append("' LIMIT 1;");
         return checkTableQuery.toString();
     }
 
@@ -141,7 +140,7 @@ public class SqlQueryFactory {
     public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
-        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty + " LIMIT 1";
+        String query = "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty + " LIMIT 1";
         return query;
     }
 
@@ -149,7 +148,7 @@ public class SqlQueryFactory {
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
-        String query = "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty;
+        String query = "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty;
         return query;
     }
 
