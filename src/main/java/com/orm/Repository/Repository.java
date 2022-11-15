@@ -8,13 +8,19 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class Repository<T> {
-    private static Logger logger = LogManager.getLogger(Repository.class);
+    private static final Logger logger = LogManager.getLogger(Repository.class);
     private final Class<T> clz;
 
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
-        SqlManager.createTable(clz);
+        try {
+            SqlManager.createTable(clz);
+            ErrorHandling.validate(clz, logger);
+            logger.info("Table was created");
+        } catch (RuntimeException e) {
+            logger.info("Table already exists");
+        }
     }
 
     public List<T> findAll() {
@@ -41,11 +47,6 @@ public class Repository<T> {
 
         ErrorHandling.validate(t, logger);
         SqlManager.addMultipleItems(t);
-    }
-
-    public T getOneById(int id) {
-        ErrorHandling.validate(clz, id, logger);
-        return SqlManager.getItemById(this.clz, id);
     }
 
     public int updatePropertyById(String propertyName, Object property, int id) {
