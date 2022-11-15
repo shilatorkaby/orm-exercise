@@ -217,12 +217,13 @@ public class SqlManager {
 
     //TODO Delete entire table (truncate)
     public static <T> void deleteTable(Class<T> clz) {
+        //check if table is there if yes delete else do nothing.
         logger.info("start deleting table");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteTableQuery(clz);
             Statement stmt = con.createStatement();
             logger.info("executing deleting Table query");
-            stmt.executeQuery(query);
+            stmt.execute(query);
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteTable");
             throw new RuntimeException(e);
