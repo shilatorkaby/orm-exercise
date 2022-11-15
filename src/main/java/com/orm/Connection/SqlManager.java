@@ -178,15 +178,14 @@ public class SqlManager {
      * Delete Functionality
      */
     //TODO: Single item deletion by any property (delete user with email x)
-    public static <T> List<T> deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
+    public static <T> int deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting single item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteSingleItemByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting single item by property query");
-            stmt.execute(query);
-            ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
+            int rs = stmt.executeUpdate(query);
+            return rs;
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteSingleItemByProperty");
             throw new RuntimeException(e);
@@ -194,14 +193,14 @@ public class SqlManager {
     }
 
     //TODO Multiple item deletion by any property (delete all users called x)
-    public static <T> List<T> deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
+    public static <T> int deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteItemsByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting item by property query");
-            ResultSet rs = stmt.executeQuery(query);
-            return resultSetToList(clz, rs);
+            int rs = stmt.executeUpdate(query);
+            return rs;
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteItemsByProperty");
             throw new RuntimeException(e);
@@ -209,14 +208,15 @@ public class SqlManager {
     }
 
     //TODO Delete entire table (truncate)
-    public static <T> void deleteTable(Class<T> clz) {
+    public static <T> int deleteTable(Class<T> clz) {
         //check if table is there if yes delete else do nothing.
         logger.info("start deleting table");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
             String query = SqlQueryFactory.createDeleteTableQuery(clz);
             Statement stmt = con.createStatement();
             logger.info("executing deleting Table query");
-            stmt.execute(query);
+            int rs = stmt.executeUpdate(query);
+            return rs;
         } catch (SQLException e) {
             logger.error("Sql Exception in deleteTable");
             throw new RuntimeException(e);

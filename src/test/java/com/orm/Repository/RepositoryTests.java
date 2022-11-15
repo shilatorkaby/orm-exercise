@@ -1,5 +1,6 @@
 package com.orm.Repository;
 
+import com.orm.Entity.Car;
 import com.orm.Entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,19 +59,20 @@ public class RepositoryTests {
 
         List<User> userList = new ArrayList<User>(Arrays.asList(user2, user1));
 
-
 //        assertDoesNotThrow(() -> repo.findAll());
         assertEquals(userList.toString(), repoTest.findAll().toString());
         repoTest.deleteTable();
 
     }
 
-    @Test
-    void findAll_WrongPropertyType_Exception() {
-//        assertThrows(Exception.class,()-> repo.findAll());
-
-
-    }
+//    @Test
+//    void findAll_WrongPropertyType_Exception() {
+//        assertThrows(Exception.class , ()->repo.findAll());
+//
+//        assert (1 != 1);
+//
+//
+//    }
 
     @Test
     void findAllWithParam_RightPropertyType_Work() {
@@ -85,13 +87,17 @@ public class RepositoryTests {
 
     @Test
     void findAllWithParam_WrongPropertyName_Exception() {
+
+
         User user = new User();
         user.setEmail("khader@gmail.com");
-//        user.setName("Khader");
+
         user.setId(1);
         repo.save(user);
 
-        assertThrows(Exception.class, () -> repo.findAll("k", 1));
+
+        assertThrows(Exception.class, () -> repo.findAll("kkkk", 1).get(0));
+
     }
 
     @Test
@@ -109,10 +115,11 @@ public class RepositoryTests {
     void getItemById_WrongId_Exception() {
         User user = new User();
         user.setEmail("khader@gmail.com");
-//        user.setName("Khader");
         user.setId(1);
         repo.save(user);
-        assertThrows(Exception.class, () -> repo.getItemById(2));
+
+        assertThrows(Exception.class, () -> repo.getItemById(1000).toString());
+
     }
 
     @Test
@@ -126,8 +133,7 @@ public class RepositoryTests {
 
     @Test
     void saveSingleItem_WrongItem_Exception() {
-//        Car car = new Car("car1", 1);
-//        assertDoesNotThrow(() -> repo.save(car));
+        assertThrows(Exception.class, () -> repo.save((User) null));
     }
 
     @Test
@@ -139,9 +145,7 @@ public class RepositoryTests {
 
     @Test
     void saveMultipleItem_WrongItem_Exception() {
-//        Car car1 = new Car("car1", 1);
-//        Car car2 = new Car("car2", 2);
-//        assertDoesNotThrow(() -> repo.save(car1, car2));
+        assertThrows(Exception.class, () -> repo.save(null, null));
 
     }
 
@@ -165,6 +169,14 @@ public class RepositoryTests {
 
     @Test
     void updatePropertyById_WrongProperty_Exception() {
+
+        User user = new User();
+        user.setEmail("khader@gmail.com");
+        user.setId(10);
+        repo.save(user);
+
+
+        assertThrows(Exception.class, () -> repo.updatePropertyById("kkkk", "what@gmail.com", 10));
     }
 
     @Test
@@ -186,75 +198,100 @@ public class RepositoryTests {
 
     @Test
     void updateItem_RightItemWrongId_Exception() {
+        User user = new User();
+        user.setId(10);
+        repo.save(user);
+
+        User updatedUser = new User();
+        updatedUser.setName("khader");
+        updatedUser.setPassword("khaderPass");
+        updatedUser.setEmail("what@gmail.com");
+        updatedUser.setId(10);
+        assertEquals(0, repo.updateItem(updatedUser, 10000));
+
+
     }
 
     @Test
     void deleteOneItemByProperty_RightParams_Work() {
+
         User user = new User();
-        user.setEmail("khader@gmail.com");
-//        user.setName("Khader");
-        user.setId(1);
+        user.setId(10);
+        user.setName("khader");
         repo.save(user);
 
-        assertDoesNotThrow(() -> repo.deleteOneItemByProperty("name", "Khader"));
+        User user2 = new User();
+        user2.setId(11);
+        user2.setName("khader");
+        repo.save(user2);
+
+
+        assertTrue(0 < repo.deleteOneItemByProperty("name", "khader"));
+        assertEquals(user2.toString(), repo.getItemById(11).toString());
     }
 
     @Test
     void deleteOneItemByProperty_WrongPropertyName_Exception() {
         User user = new User();
-        user.setEmail("khader@gmail.com");
-//        user.setName("Khader");
-        user.setId(1);
+        user.setId(10);
+        user.setName("khader");
         repo.save(user);
 
-        assertThrows(Exception.class, () -> repo.deleteOneItemByProperty("id", "Khader"));
+        User user2 = new User();
+        user2.setId(11);
+        user2.setName("khader");
+        repo.save(user2);
+
+
+        assertThrows(Exception.class, () -> repo.deleteOneItemByProperty("kkk", "khader"));
     }
 
     @Test
     void deleteItemsByProperty_RightParams_Work() {
-        User user1 = new User();
-        user1.setEmail("khader@gmail.com");
-//        user1.setName("Khader");
-        user1.setId(1);
-        repo.save(user1);
+
+        User user = new User();
+        user.setId(10);
+        user.setName("khader");
+        repo.save(user);
 
         User user2 = new User();
-        user2.setEmail("khsader@gmail.com");
-//        user2.setName("Khader");
-        user2.setId(2);
+        user2.setId(11);
+        user2.setName("khader");
         repo.save(user2);
 
-        assertDoesNotThrow(() -> repo.deleteItemsByProperty("name", "Khader"));
+
+        assertTrue(0 < repo.deleteItemsByProperty("name", "khader"));
+        assertThrows(Exception.class, () -> repo.getItemById(11));
     }
 
     @Test
     void deleteItemsByProperty_WrongPropertyName_Exception() {
-
-        User user1 = new User();
-        user1.setEmail("khader@gmail.com");
-//        user1.setName("Khader");
-        user1.setId(1);
-        repo.save(user1);
+        User user = new User();
+        user.setId(10);
+        user.setName("khader");
+        repo.save(user);
 
         User user2 = new User();
-        user2.setEmail("khsader@gmail.com");
-//        user2.setName("Khader");
-        user2.setId(2);
+        user2.setId(11);
+        user2.setName("khader");
         repo.save(user2);
 
-        assertThrows(Exception.class, () -> repo.deleteItemsByProperty("id", "Khader"));
+        assertThrows(Exception.class, () -> repo.deleteItemsByProperty("kkk", "khader"));
 
     }
 
     @Test
     void deleteTable_RightClass_Work() {
-        assertDoesNotThrow(() -> repo.deleteTable());
+
+        repo.deleteTable();
+        assertThrows(Exception.class, () -> repo.findAll());
     }
 
     @Test
     void deleteTable_nullClass_Exception() {
-//        Repository<User> repoTest = new Repository<>(User.class);
-//        assertThrows(Exception.class, () -> repoTest.deleteTable());
+        repo.deleteTable();
+        assertEquals(0, repo.deleteTable());
+
 
     }
 

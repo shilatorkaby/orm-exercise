@@ -58,18 +58,18 @@ public class Repository<T> {
         return SqlManager.updateEntireItem(this.clz, object, id);
     }
 
-    public List<T> deleteOneItemByProperty(String propertyName, Object property) {
+    public int deleteOneItemByProperty(String propertyName, Object property) {
         ErrorHandling.validate(clz, propertyName, property, logger);
         return SqlManager.deleteSingleItemByProperty(this.clz, propertyName, property);
     }
 
-    public List<T> deleteItemsByProperty(String propertyName, Object property) {
+    public int deleteItemsByProperty(String propertyName, Object property) {
         ErrorHandling.validate(clz, propertyName, property, logger);
         return SqlManager.deleteItemsByProperty(this.clz, propertyName, property);
     }
 
-    public void deleteTable() {
+    public int deleteTable() {
         ErrorHandling.validate(clz, logger);
-        SqlManager.deleteTable(this.clz);
+        return SqlManager.deleteTable(this.clz);
     }
 }

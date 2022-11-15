@@ -237,7 +237,7 @@ public class SqlQueryFactory {
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
-        return "DELETE FROM " + tableName + "WHERE " + propertyName + " = " + stringProperty;
+        return "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty;
     }
 
 
