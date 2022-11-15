@@ -8,16 +8,20 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class Repository<T> {
-    private static Logger logger = LogManager.getLogger(Repository.class);
+    private static final Logger logger = LogManager.getLogger(Repository.class);
     private final Class<T> clz;
 
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
-        SqlManager.createTable(clz);
-        ErrorHandling.validate(clz, logger);
-        if (!SqlManager.checkIfTableExists(clz)) {
+        try
+        {
             SqlManager.createTable(clz);
+            ErrorHandling.validate(clz, logger);
+            logger.info("Table was created");
+        }
+        catch (RuntimeException e) {
+            logger.info("Table already exists");
         }
     }
 
@@ -37,7 +41,6 @@ public class Repository<T> {
     }
 
     public void save(T t) {
-
         ErrorHandling.validate(t, logger);
         SqlManager.addSingleItem(t);
     }

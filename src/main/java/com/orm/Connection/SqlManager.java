@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SqlManager {
-    private static Logger logger = LogManager.getLogger(SqlManager.class);
+    private static final Logger logger = LogManager.getLogger(SqlManager.class);
 
     public static <T> void createTable(Class<T> clz) {
         logger.info("Start Creating Table");
@@ -108,20 +108,25 @@ public class SqlManager {
                 Field[] declaredFields = clz.getDeclaredFields(); //list of fields
                 for (Field field : declaredFields) {
                     field.setAccessible(true); //turn to public
+//                    System.out.println(new Gson().fromJson(rs.getObject(field.getName()), new User()));
                     field.set(item, rs.getObject(field.getName()));
+
+                    results.add(item);
                 }
-                results.add(item);
+
             }
-            return results;
+
         } catch (SQLException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             logger.error("Result sets is empty");
             throw new SQLException("Result sets is empty");
-        } catch (
-                NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             logger.error(e.getMessage() + "Error in class' constructor");
             throw new RuntimeException(e.getMessage() + "Error in class' constructor");
         }
+        return results;
     }
+
+
 
     /**
      * ADD Functionality
