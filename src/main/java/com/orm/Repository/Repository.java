@@ -5,6 +5,7 @@ import com.orm.Utils.ErrorHandling;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Repository<T> {
