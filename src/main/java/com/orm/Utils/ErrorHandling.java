@@ -2,7 +2,7 @@ package com.orm.Utils;
 
 import org.apache.logging.log4j.Logger;
 
-public class ErrorHandlling {
+public class ErrorHandling {
 
     public static <T> void validate(Class<T> clz, String propertyName, Object property, Logger logger) {
         validateClz(clz, logger);
