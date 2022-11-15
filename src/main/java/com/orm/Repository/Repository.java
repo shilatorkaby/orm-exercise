@@ -1,5 +1,4 @@
 package com.orm.Repository;
-
 import com.orm.Connection.SqlManager;
 import com.orm.Utils.ErrorHandling;
 import org.apache.logging.log4j.LogManager;
