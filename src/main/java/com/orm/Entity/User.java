@@ -25,11 +25,11 @@ public class User {
 
 
     public User() {
-        id = ThreadLocalRandom.current().nextInt(100000000,999999999);
-        name = new Name("shilat","orkaby");//new Faker().name().firstName();
-        email = name.firstName+ ThreadLocalRandom.current().nextInt(100, 299 + 1)+"@gmail.com";
-        password = name.firstName+ ThreadLocalRandom.current().nextInt(10000, 99999);
-
+        name = new Name("shilat", "orkaby");
+        email = name.firstName +
+                ThreadLocalRandom.current().nextInt(100, 299 + 1)+"@gmail.com";
+        password = name.firstName +
+                ThreadLocalRandom.current().nextInt(10000, 99999);
     }
 
 
@@ -48,7 +48,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setEmail(Name name) {
+
+    public void setName(Name name) {
         this.name = new Name(name.getFirstName(),name.getLastName());
     }
 

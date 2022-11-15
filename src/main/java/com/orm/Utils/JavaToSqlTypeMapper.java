@@ -16,7 +16,6 @@ public class JavaToSqlTypeMapper {
 
     static HashMap<String, String> map() {
         HashMap<String, String> typesMap = new HashMap<>();
-//Double , Float
         typesMap.put("String", "VARCHAR(255)");
         typesMap.put("int", "INTEGER");
         typesMap.put("Integer", "INTEGER");

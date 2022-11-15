@@ -291,9 +291,5 @@ public class RepositoryTests {
     void deleteTable_nullClass_Exception() {
         repo.deleteTable();
         assertEquals(0, repo.deleteTable());
-
-
     }
-
-
 }
