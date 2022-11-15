@@ -14,6 +14,9 @@ public class Client {
         //System.out.println(SqlQueryFactory.createDeleteTableQuery(User.class));
        // System.out.println(SqlQueryFactory.createAddSingleItemToTableQuery(user1));
         List<User> userList = users.findAll();
+        for (User user : userList) {
+            System.out.println(user);
+        }
 //        System.out.println(userList);
         //SqlQueryFactory.getValues(user);
     }

@@ -49,7 +49,7 @@ public class Repository<T> {
         SqlManager.addMultipleItems(t);
     }
 
-    public T updatePropertyById(String propertyName, Object property, int id) {
+    public int updatePropertyById(String propertyName, Object property, int id) {
         ErrorHandling.validate(clz, propertyName, property, id, logger);
         return SqlManager.updatePropertyById(this.clz, propertyName, property, id);
     }
