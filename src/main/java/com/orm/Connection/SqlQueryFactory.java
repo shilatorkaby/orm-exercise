@@ -191,7 +191,7 @@ public class SqlQueryFactory {
      */
     // TODO: Update an entire item
     public static <T> String createUpdateItemQuery(Class<T> clz, T object, int id) {
-        String tableName = clz.getSimpleName().toLowerCase() + "_data";
+        String tableName = clz.getSimpleName().toLowerCase();
         String query = "UPDATE " + tableName + " SET ";
         Field[] declaredFields = clz.getDeclaredFields(); //list of fields
         for (Field field : declaredFields) {
