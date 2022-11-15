@@ -157,7 +157,6 @@ public class SqlQueryFactory {
         String query = "INSERT INTO " + tableName + getValues(t);
         return query;
     }
-
     public static <T> String getValues(T t) {
         StringBuilder values = new StringBuilder(" VALUES (");
         Field[] declaredFields = t.getClass().getDeclaredFields();
@@ -183,9 +182,6 @@ public class SqlQueryFactory {
         values.append(");");
         return values.toString();
     }
-
-    // TODO: Add multiple items
-
 
     /**
      * UPDATE Functionality
@@ -255,7 +251,5 @@ public class SqlQueryFactory {
         } else {
             return obj.toString();
         }
-
-
     }
 }

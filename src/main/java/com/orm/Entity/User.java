@@ -48,10 +48,10 @@ public class User {
     }
 
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
     public void setEmail(Name name) {
-        name = new Name(name.getFirstName(),name.getLastName());
+        this.name = new Name(name.getFirstName(),name.getLastName());
     }
 
 

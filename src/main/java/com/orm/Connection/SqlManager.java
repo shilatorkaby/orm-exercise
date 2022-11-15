@@ -1,8 +1,6 @@
 package com.orm.Connection;
 
 import com.google.gson.Gson;
-import com.orm.Entity.User;
-import com.orm.Utils.JavaToSqlTypeMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -92,18 +90,16 @@ public class SqlManager {
                 T item = constructor.newInstance();
                 Field[] declaredFields = clz.getDeclaredFields(); //list of fields
                 for (Field field : declaredFields) {
+                    field.setAccessible(true); //turn to public
                     if (rs.getObject(field.getName()).toString().contains("{")) {
                         Gson g = new Gson();
-                        field.set(item, g.fromJson(rs.getObject(field.getName()).toString(), field.getClass()));
+                        field.set(item, g.fromJson(rs.getObject(field.getName()).toString(), field.getType()));
                     } else {
-                        field.setAccessible(true); //turn to public
                         field.set(item, rs.getObject(field.getName()));
                     }
-                    results.add(item);
                 }
-
+                results.add(item);
             }
-
         } catch (SQLException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             logger.error("Result sets is empty");
             throw new SQLException("Result sets is empty");
