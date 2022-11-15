@@ -1,0 +1,7 @@
+.idea/
+.class/
+.iml
+target/
+.log
+logs/app.log
+orm-exercise.iml
