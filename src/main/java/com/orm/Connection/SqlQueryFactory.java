@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class SqlQueryFactory {
 
     public static <T> String createNewTableQuery(Class<T> clz) {
-        StringBuilder createTableQuery = new StringBuilder("CREATE TABLE ");
+        StringBuilder createTableQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
         createTableQuery.append(clz.getSimpleName().toLowerCase());
         createTableQuery.append(" (\n");
         createTableQuery.append(mapClassToSqlColumn(clz));
