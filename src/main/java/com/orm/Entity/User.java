@@ -7,11 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import com.github.javafaker.Faker;
+import com.orm.Annotation.AutoIncrement;
+import com.orm.Annotation.PrimaryKey;
+import com.orm.Annotation.Unique;
 //import com.github.javafaker.Name;
 
 public class User {
 
+
+    @PrimaryKey
+    @AutoIncrement
     int id;
+
+
     Name name;
     String email;
     String password;

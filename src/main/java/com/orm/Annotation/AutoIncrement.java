@@ -5,6 +5,4 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @Inherited
-public @interface AutoIncrement {
-    boolean AutoIncrement() default true;
-}
+public @interface AutoIncrement {}
