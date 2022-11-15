@@ -50,6 +50,10 @@ public class User {
     public void setEmail(String email) {
         email = email;
     }
+    public void setEmail(Name name) {
+        name = new Name(name.getFirstName(),name.getLastName());
+    }
+
 
     public int getId() {
         return id;
@@ -59,8 +63,8 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name.firstName;
+    public Name getName() {
+        return name;
     }
 //
 //    public void setName(String name) {

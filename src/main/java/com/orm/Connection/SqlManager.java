@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SqlManager {
@@ -93,13 +92,16 @@ public class SqlManager {
                 T item = constructor.newInstance();
                 Field[] declaredFields = clz.getDeclaredFields(); //list of fields
                 for (Field field : declaredFields) {
-                    field.setAccessible(true); //turn to public
-//                    System.out.println(new Gson().fromJson(rs.getObject(field.getName()), new User()));
-                    field.set(item, rs.getObject(field.getName()));
-
-
+                    if (rs.getObject(field.getName()).toString().contains("{")) {
+                        Gson g = new Gson();
+                        field.set(item, g.fromJson(rs.getObject(field.getName()).toString(), field.getClass()));
+                    } else {
+                        field.setAccessible(true); //turn to public
+                        field.set(item, rs.getObject(field.getName()));
+                    }
+                    results.add(item);
                 }
-                results.add(item);
+
             }
 
         } catch (SQLException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -184,7 +186,6 @@ public class SqlManager {
             String query = SqlQueryFactory.createDeleteSingleItemByPropertyQuery(clz, propertyName, property);
             Statement stmt = con.createStatement();
             logger.info("executing deleting single item by property query");
-            stmt.execute(query);
             ResultSet rs = stmt.executeQuery(query);
             return resultSetToList(clz, rs);
         } catch (SQLException e) {

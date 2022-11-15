@@ -169,6 +169,7 @@ public class SqlQueryFactory {
                     values.append(String.format("\'%s\'", o));
                 } else if (JavaToSqlTypeMapper.nonPrimitiveType(o.getClass().getSimpleName())) {
                     values.append("'" + new Gson().toJson(o) + "'");
+                    System.out.println(new Gson().toJson(o));
                 } else {
                     values.append(o);
                 }
