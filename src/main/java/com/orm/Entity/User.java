@@ -18,8 +18,6 @@ public class User {
     @PrimaryKey
     @AutoIncrement
     int id;
-
-
     Name name;
     String email;
     String password;
@@ -51,7 +49,7 @@ public class User {
         this.email = email;
     }
     public void setEmail(Name name) {
-        this.name = new Name(name.getFirstName(),name.getLastName());
+        name = new Name(name.getFirstName(),name.getLastName());
     }
 
 
