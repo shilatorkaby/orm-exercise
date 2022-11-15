@@ -1,4 +1,5 @@
 package com.orm.Connection;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,5 +23,9 @@ public class ConnectionFacade {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String getDataBase() {
+        return DATA_BASE;
     }
 }
