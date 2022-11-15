@@ -1,9 +1,0 @@
-2022-11-15 08:44:08,699 INFO    com.orm.Connection.SqlManager - Start Creating Table
-2022-11-15 08:44:08,703 INFO    com.orm.Connection.ConnectionFacade - Connection Started
-2022-11-15 08:44:09,090 INFO    com.orm.Connection.SqlManager - start executing query
-2022-11-15 08:44:09,104 INFO    com.orm.Connection.SqlManager - Table is Created
-2022-11-15 08:44:09,105 INFO    com.orm.Connection.SqlManager - start Find All
-2022-11-15 08:44:09,105 INFO    com.orm.Connection.ConnectionFacade - Connection Started
-2022-11-15 08:44:09,134 INFO    com.orm.Connection.SqlManager - start executing query
-2022-11-15 08:44:09,156 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@1c80e49b
-2022-11-15 08:44:09,156 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
