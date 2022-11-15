@@ -48,12 +48,12 @@ public class Repository<T> {
         return SqlManager.getItemById(this.clz, id);
     }
 
-    public T updatePropertyById(String propertyName, Object property, int id) {
+    public int updatePropertyById(String propertyName, Object property, int id) {
         ErrorHandling.validate(clz, propertyName, property, id, logger);
         return SqlManager.updatePropertyById(this.clz, propertyName, property, id);
     }
 
-    public T updateItem(T object, int id) {
+    public int updateItem(T object, int id) {
         ErrorHandling.validate(clz, object, id, logger);
         return SqlManager.updateEntireItem(this.clz, object, id);
     }
