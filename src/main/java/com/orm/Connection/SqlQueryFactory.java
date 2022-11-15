@@ -21,18 +21,6 @@ public class SqlQueryFactory {
         return createTableQuery.toString();
     }
 
-    public static <T> String checkIfTableExistsQuery(Class<T> clz) {
-        StringBuilder checkTableQuery = new StringBuilder(
-                "SELECT EXISTS( " +
-                        "SELECT * FROM information_schema.tables " +
-                        "WHERE table_schema = ' ");
-        checkTableQuery.append(ConnectionFacade.getDataBase());
-        checkTableQuery.append("' AND table_name = '");
-        checkTableQuery.append(clz.getSimpleName().toLowerCase());
-        checkTableQuery.append(" ');");
-        return checkTableQuery.toString();
-    }
-
     public static <T> String mapClassToSqlColumn(Class<T> clz) {
         StringBuilder sqlColumns = new StringBuilder();
 

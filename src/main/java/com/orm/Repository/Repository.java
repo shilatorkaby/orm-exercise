@@ -15,8 +15,6 @@ public class Repository<T> {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
         SqlManager.createTable(clz);
-        ErrorHandling.validate(clz, logger);
-        SqlManager.createTable(clz);
     }
 
     public List<T> findAll() {

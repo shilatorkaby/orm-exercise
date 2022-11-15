@@ -33,29 +33,6 @@ public class SqlManager {
         }
     }
 
-    public static <T> boolean checkIfTableExists(Class<T> clz) {
-        logger.info("Start Checking if Table is exists");
-
-        try (java.sql.Connection con = ConnectionFacade.getConnection()) {
-            Statement stmt = con.createStatement();
-            String query = SqlQueryFactory.checkIfTableExistsQuery(clz);
-            logger.info("start executing query");
-            ResultSet res = stmt.executeQuery(query);
-            String tableName = clz.getSimpleName().toLowerCase();
-            res.next();
-
-            if (res.getInt(1) != 0) {
-                logger.info("the table " + tableName + " does exists");
-            } else {
-                logger.info("the table " + tableName + "doesn't exists");
-            }
-            return res.getInt(1) != 0;
-        } catch (SQLException e) {
-            logger.error("Sql Exception in checkingIfTableExists table");
-            throw new RuntimeException(e);
-        }
-    }
-
     public static <T> List<T> findAll(Class<T> clz) {
         logger.info("start Find All");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
