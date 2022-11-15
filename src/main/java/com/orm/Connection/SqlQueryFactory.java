@@ -49,13 +49,37 @@ public class SqlQueryFactory {
         return query;
     }
 
-
     /**
      * ADD Functionality
      */
     // TODO: Add a single item to a table
-    public static <T> String createAddSingleItemToTableQuery() {
-        return null;
+    public static <T> String createAddSingleItemToTableQuery(T t) {
+        String tableName = t.getClass().getSimpleName().toLowerCase();
+        String query = "INSERT INTO " + tableName + getValues(t);
+        return query;
+    }
+
+    public static <T> String getValues(T t) {
+        StringBuilder values = new StringBuilder(" VALUES (");
+        Field[] declaredFields = t.getClass().getDeclaredFields();
+        for (int i = 0; i< declaredFields.length; i++) {
+            declaredFields[i].setAccessible(true);
+            try {
+                Object o = declaredFields[i].get(t);
+                if (o instanceof String) {
+                    values.append(String.format("\'%s\'", o));
+                } else {
+                    values.append(o);
+                }
+                if (i != declaredFields.length - 1) {
+                    values.append(", ");
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        values.append(");");
+        return values.toString();
     }
 
     // TODO: Add multiple items
