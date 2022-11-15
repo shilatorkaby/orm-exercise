@@ -1,0 +1,485 @@
+2022-11-15 14:18:18,682 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:18:18,691 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:18:22,337 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:18:22,344 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:18:36,335 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:18:36,341 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:19:02,216 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:19:02,223 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:19:56,330 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:19:56,338 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:19:56,637 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:19:56,671 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:20:11,570 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:20:11,578 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:20:11,876 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:20:11,899 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:22:16,210 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:22:16,220 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:22:16,586 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:22:16,615 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:30:18,031 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:30:18,038 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:30:18,356 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:30:18,379 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:30:18,379 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 14:30:18,388 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 14:30:18,388 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 14:30:18,389 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:30:18,441 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 14:30:18,442 ERROR   com.orm.Connection.SqlManager - Sql Exception in addMultipleItems
+2022-11-15 14:31:10,974 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:31:13,944 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:31:37,443 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:31:45,041 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:31:45,048 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:31:45,344 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:31:45,365 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:31:45,366 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 14:31:45,371 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 14:31:45,371 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 14:31:45,371 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:31:45,425 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 14:31:45,427 ERROR   com.orm.Connection.SqlManager - Sql Exception in addMultipleItems
+2022-11-15 14:32:08,453 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:32:08,673 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:32:52,189 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:33:06,896 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:33:06,901 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:33:07,204 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:33:07,227 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:33:07,227 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 14:33:07,233 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 14:33:07,234 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 14:33:07,234 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:33:07,281 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 14:33:07,283 ERROR   com.orm.Connection.SqlManager - Sql Exception in addMultipleItems
+2022-11-15 14:33:20,542 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 14:33:20,556 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 14:33:21,462 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 14:33:21,526 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 14:33:21,526 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 14:34:03,337 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 14:34:07,408 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 14:34:08,608 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:13:29,699 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:13:29,705 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:13:30,013 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:13:30,042 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:13:30,043 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:14:27,503 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:14:27,510 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:14:27,813 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:14:27,834 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:14:27,834 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:14:27,840 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:14:27,840 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:14:27,840 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:14:27,893 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:14:27,900 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 15:14:27,900 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:14:27,905 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:14:27,928 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@4f25b795
+2022-11-15 15:14:27,929 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 15:14:44,462 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:14:44,472 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:14:44,942 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:14:44,974 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:14:44,974 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:14:44,980 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:14:44,980 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:14:44,980 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:14:45,054 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:15:02,284 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 15:15:04,678 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:15:15,344 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:15:34,642 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@6986bbaf
+2022-11-15 15:15:39,746 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 15:19:04,384 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:19:04,391 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:19:04,773 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:19:04,799 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:19:04,800 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:19:04,807 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:19:04,807 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:19:04,807 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:19:04,864 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:19:04,870 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 15:19:04,871 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:19:04,877 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:19:04,901 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@43f82e78
+2022-11-15 15:19:04,901 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 15:22:56,419 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:22:56,425 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:22:56,840 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:22:56,868 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:22:56,868 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:22:56,875 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:22:56,875 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:22:56,875 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:22:56,930 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:25:12,051 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:25:12,057 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:25:12,357 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:25:12,386 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:25:12,386 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:25:12,391 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:25:12,391 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:25:12,391 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:25:12,444 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:25:12,449 INFO    com.orm.Connection.SqlManager - start Find All according to property name and value
+2022-11-15 15:25:12,449 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:25:12,455 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:25:12,477 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@4f25b795
+2022-11-15 15:25:12,477 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 15:25:28,343 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:25:28,351 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:25:28,782 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:25:28,809 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:25:28,810 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:25:28,816 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:25:28,816 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:25:28,816 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:25:28,876 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:25:48,073 INFO    com.orm.Connection.SqlManager - start Find All according to property name and value
+2022-11-15 15:25:49,676 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:26:05,431 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:26:28,455 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@6986bbaf
+2022-11-15 15:26:37,384 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 15:28:44,400 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:28:44,406 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:28:44,707 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:28:44,732 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:28:44,732 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:29:01,909 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:29:10,748 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:29:11,546 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:31:42,265 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:32:29,515 INFO    com.orm.Connection.SqlManager - start Find All according to property name and value
+2022-11-15 15:32:29,515 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:32:29,527 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:32:52,543 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:32:52,551 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:32:52,833 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:32:52,852 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:32:52,852 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:32:52,857 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:32:52,857 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:32:52,857 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:32:52,906 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:32:52,913 INFO    com.orm.Connection.SqlManager - start Find All according to property name and value
+2022-11-15 15:32:52,913 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:32:52,917 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:32:52,937 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@4f25b795
+2022-11-15 15:32:52,938 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 15:33:22,359 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:33:22,366 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:33:22,684 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:33:22,708 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:33:22,708 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:33:22,715 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:33:22,715 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:33:22,716 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:33:22,763 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:34:50,242 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:34:50,250 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:34:50,567 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:34:50,586 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:34:50,587 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:34:50,593 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:34:50,594 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:34:50,594 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:34:50,637 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:39:56,347 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 15:39:56,354 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:39:56,674 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 15:39:56,715 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:39:56,715 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:39:56,725 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:39:56,741 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:39:56,742 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:39:56,748 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:39:56,749 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:39:56,749 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:39:56,806 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 15:39:56,810 ERROR   com.orm.Connection.SqlManager - Sql Exception in addMultipleItems
+2022-11-15 15:40:13,173 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 15:40:13,180 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:40:13,512 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 15:40:46,163 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:40:46,163 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:40:46,178 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:40:53,904 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 15:40:53,913 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:40:54,331 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 15:41:00,009 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:41:00,009 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:41:00,025 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:41:00,050 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:41:00,051 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:41:02,984 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:41:02,985 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:41:02,986 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:41:08,533 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 15:41:08,544 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:41:08,900 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 15:41:53,978 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:41:56,886 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:50:03,090 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:50:26,054 ERROR   com.orm.Connection.SqlManager - Sql Exception in creating table
+2022-11-15 15:50:26,056 INFO    com.orm.Repository.Repository - Table already exists
+2022-11-15 15:50:26,082 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:50:26,082 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:50:26,083 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:58:59,869 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 15:58:59,877 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:59:00,193 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 15:59:00,214 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:59:00,214 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:59:00,221 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:59:00,236 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 15:59:00,236 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 15:59:14,408 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 15:59:14,414 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:59:14,725 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 15:59:14,747 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 15:59:14,748 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:59:14,757 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 15:59:14,770 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 15:59:14,771 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 15:59:14,777 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 15:59:14,778 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 15:59:14,778 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 15:59:14,836 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:00:00,455 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:00:00,460 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:00:00,792 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:00:00,810 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:00:00,810 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:00:00,819 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:00:00,835 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:00:00,837 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:00:00,845 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:00:00,846 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:00:00,846 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:00:00,899 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:00:00,905 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:00:00,906 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:00:00,910 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:00:00,929 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@6f3c660a
+2022-11-15 16:00:00,930 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:07:29,418 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:07:29,425 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:29,764 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:07:32,066 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:07:32,066 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:32,072 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:07:32,085 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:07:32,086 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:07:32,090 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:07:32,090 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:07:32,090 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:44,006 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:07:44,016 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:44,435 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:07:44,459 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:07:44,459 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:44,473 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:07:44,494 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:07:44,495 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:07:44,503 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:07:44,504 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:07:44,504 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:44,564 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:07:44,575 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:07:44,575 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:07:44,581 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:07:44,610 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@460ebd80
+2022-11-15 16:07:44,610 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:08:04,754 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:08:04,760 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:08:05,060 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:08:05,078 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:08:05,078 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:08:05,086 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:08:22,147 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:08:29,479 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:09:01,837 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:09:12,784 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:09:14,353 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:09:37,266 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:09:37,273 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:09:37,274 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:09:37,284 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:09:41,005 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:09:41,022 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:09:41,472 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:09:41,499 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:09:41,499 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:09:41,509 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:09:41,526 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:09:41,528 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:09:41,538 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:09:41,538 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:09:41,538 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:12:01,026 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:12:01,039 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:12:01,040 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:12:01,045 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:12:01,062 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@22bac7bc
+2022-11-15 16:12:01,062 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:12:18,772 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:12:18,778 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:12:19,068 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:12:19,089 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:12:19,090 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:12:19,099 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:12:19,114 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:12:19,114 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:12:19,121 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:12:19,121 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:12:19,121 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:12:19,175 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:15:11,100 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:15:11,112 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:15:11,581 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:15:11,602 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:15:11,602 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:15:11,611 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:15:11,626 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:15:11,627 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:15:11,632 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:15:11,632 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:15:11,633 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:15:50,167 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:16:28,706 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:16:29,719 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:16:53,882 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:17:38,165 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@22bac7bc
+2022-11-15 16:17:48,607 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:30:36,925 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:30:36,938 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:30:37,397 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:30:37,426 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:30:37,427 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:30:37,435 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:30:37,467 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:30:37,467 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:30:37,474 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:30:37,474 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:30:37,474 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:30:53,468 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:31:27,711 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:31:28,493 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:31:31,537 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:31:36,807 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@22bac7bc
+2022-11-15 16:31:41,246 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:33:48,514 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:33:48,525 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:33:48,969 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:33:48,990 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:33:48,991 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:33:49,000 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:33:49,016 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:33:49,017 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:33:49,025 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:33:49,025 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:33:49,025 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:33:49,088 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:33:57,984 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:33:57,985 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:33:57,989 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:33:58,007 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@46944ca9
+2022-11-15 16:33:58,008 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:34:02,484 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:34:02,495 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:34:02,883 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:34:02,909 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:34:02,909 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:34:02,918 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:34:02,935 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:34:02,936 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:34:02,942 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:34:02,942 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:34:02,943 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:34:02,998 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:34:03,004 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:34:03,005 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:34:03,011 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:34:03,036 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@1a760689
+2022-11-15 16:34:03,036 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:35:40,537 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:35:40,545 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:35:40,933 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:35:40,957 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:35:40,958 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:35:40,966 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:35:40,982 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:35:40,982 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:35:40,988 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:35:40,988 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:35:40,989 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:35:41,045 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:35:41,051 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:35:41,052 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:35:41,056 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:35:41,079 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@1a760689
+2022-11-15 16:35:41,079 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:36:53,812 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:36:53,821 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:36:54,223 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:36:54,244 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:36:54,245 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:36:54,254 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:36:54,273 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:36:54,273 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:36:54,279 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:36:54,279 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:36:54,280 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:36:54,348 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:36:54,355 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:36:54,355 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:36:54,361 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:36:54,384 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@1a760689
+2022-11-15 16:36:54,385 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:43:09,387 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:43:09,394 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:43:09,708 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:43:09,729 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:43:09,729 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:43:09,738 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:43:09,755 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:43:09,755 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:43:09,761 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:43:09,761 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:43:09,762 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:43:09,811 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:43:09,816 INFO    com.orm.Connection.SqlManager - start Find All
+2022-11-15 16:43:09,816 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:43:09,821 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:43:09,843 INFO    com.orm.Connection.SqlManager - result is generated com.mysql.cj.jdbc.result.ResultSetImpl@6f3c660a
+2022-11-15 16:43:09,843 INFO    com.orm.Connection.SqlManager - Start resultSetToList function
+2022-11-15 16:49:25,574 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:49:25,582 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:49:25,941 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:49:25,964 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:49:25,965 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:49:25,973 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:49:25,988 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:49:25,989 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:49:25,996 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:49:25,996 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:49:25,996 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:49:26,043 INFO    com.orm.Connection.SqlManager - executing adding item query
+2022-11-15 16:52:37,792 INFO    com.orm.Connection.SqlManager - start deleting table
+2022-11-15 16:52:37,797 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:52:38,080 INFO    com.orm.Connection.SqlManager - executing deleting Table query
+2022-11-15 16:52:38,104 INFO    com.orm.Connection.SqlManager - Start Creating Table
+2022-11-15 16:52:38,104 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:52:38,112 INFO    com.orm.Connection.SqlManager - start executing query
+2022-11-15 16:52:38,129 INFO    com.orm.Connection.SqlManager - Table is Created
+2022-11-15 16:52:38,130 INFO    com.orm.Repository.Repository - Table was created
+2022-11-15 16:52:38,134 INFO    com.orm.Connection.SqlManager - start adding single item
+2022-11-15 16:52:38,136 INFO    com.orm.Connection.SqlManager - start adding multiple items
+2022-11-15 16:52:38,136 INFO    com.orm.Connection.ConnectionFacade - Connection Started
+2022-11-15 16:52:38,203 INFO    com.orm.Connection.SqlManager - executing adding item query
