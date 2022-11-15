@@ -5,25 +5,16 @@ import com.orm.Utils.ErrorHandling;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class Repository<T> {
-    private static final Logger logger = LogManager.getLogger(Repository.class);
+    private static Logger logger = LogManager.getLogger(Repository.class);
     private final Class<T> clz;
 
     public Repository(Class<T> clz) {
         this.clz = clz;
         ErrorHandling.validate(clz, logger);
-        try
-        {
-            SqlManager.createTable(clz);
-            ErrorHandling.validate(clz, logger);
-            logger.info("Table was created");
-        }
-        catch (RuntimeException e) {
-            logger.info("Table already exists");
-        }
+        SqlManager.createTable(clz);
     }
 
     public List<T> findAll() {

@@ -1,14 +1,19 @@
 package com.orm.Connection;
 
 import com.google.gson.Gson;
+import com.orm.Annotation.AutoIncrement;
+import com.orm.Annotation.PrimaryKey;
+import com.orm.Annotation.Unique;
 import com.orm.Utils.JavaToSqlTypeMapper;
 
 import java.lang.reflect.Field;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SqlQueryFactory {
 
     public static <T> String createNewTableQuery(Class<T> clz) {
-        StringBuilder createTableQuery = new StringBuilder("CREATE TABLE ");
+        StringBuilder createTableQuery = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
         createTableQuery.append(clz.getSimpleName().toLowerCase());
         createTableQuery.append(" (\n");
         createTableQuery.append(mapClassToSqlColumn(clz));
@@ -16,33 +21,113 @@ public class SqlQueryFactory {
         return createTableQuery.toString();
     }
 
-    public static <T> String checkIfTableExistsQuery(Class<T> clz) {
-        StringBuilder checkTableQuery = new StringBuilder(
-                "SELECT EXISTS( " +
-                        "SELECT * FROM information_schema.tables " +
-                        "WHERE table_schema = ' ");
-        checkTableQuery.append(ConnectionFacade.getDataBase());
-        checkTableQuery.append("' AND table_name = '");
-        checkTableQuery.append(clz.getSimpleName().toLowerCase());
-        checkTableQuery.append(" ');");
-        return checkTableQuery.toString();
-    }
-
     public static <T> String mapClassToSqlColumn(Class<T> clz) {
         StringBuilder sqlColumns = new StringBuilder();
 
         Field[] declaredFields = clz.getDeclaredFields();
-
-        for (int i = 0; i < declaredFields.length; i++) {
-            String column = declaredFields[i].getName();
-            String type = declaredFields[i].getType().getSimpleName();
+        LinkedHashMap<Field, List<String>> fieldListHashMap = validateAnnotations(declaredFields);
+        String primaryKey = null, unique = null;
+        int i = 0;
+        for (Map.Entry<Field, List<String>> entry : fieldListHashMap.entrySet()) {
+            String name = entry.getKey().getName();
+            String type = entry.getKey().getType().getSimpleName();
             String sqlType = JavaToSqlTypeMapper.mapJavaFieldToSql(type);
-            sqlColumns.append(column + " " + sqlType);
-            if (i != declaredFields.length - 1) {
+
+            List<String> values = entry.getValue();
+            sqlColumns.append(name + " " + sqlType);
+
+            if (values.size() != 0) {
+                if (values.contains(AutoIncrement.class.getName())) {
+                    sqlColumns.append(" NOT NULL AUTO_INCREMENT");
+                    primaryKey = String.format(",\nPRIMARY KEY (%s)", name);
+                }
+                if (values.contains(PrimaryKey.class.getName())
+                        && !values.contains(AutoIncrement.class.getName())) {
+                    sqlColumns.append(" NOT NULL");
+                    primaryKey = String.format(",\nPRIMARY KEY (%s)", name);
+                }
+                if (values.contains(Unique.class.getName())) {
+                    sqlColumns.append(" NOT NULL");
+                    unique = String.format(",\nUNIQUE (%s)", name);
+                }
+            }
+            if (i++ != declaredFields.length - 1) {
                 sqlColumns.append(",\n");
             }
         }
+        if (primaryKey != null) {
+            sqlColumns.append(primaryKey);
+        }
+        if (unique != null) {
+            sqlColumns.append(unique);
+        }
         return sqlColumns.toString();
+    }
+
+    private static LinkedHashMap<Field, List<String>> validateAnnotations(Field[] declaredFields) {
+        // <PrimaryKey, [id, name]>
+        HashMap<String, List<Field>> annotationListHashMap = new HashMap<>();
+
+        //<id, [PrimaryKey, AutoIncrement]>
+        LinkedHashMap<Field, List<String>> fieldListHashMap = new LinkedHashMap<>();
+
+        for (Field field : declaredFields) {
+            List<String> annotations = Arrays.stream(field.getAnnotations())
+                    .map(annotation -> annotation.annotationType().getName())
+                    .collect(Collectors.toList());
+            fieldListHashMap.put(field, annotations);
+            for (String annotation : annotations) {
+                if (!annotationListHashMap.containsKey(annotation)) {
+                    annotationListHashMap.put(annotation, List.of(field));
+                } else {
+                    List<Field> fields = annotationListHashMap.get(annotation);
+                    List<Field> copy = new ArrayList<>(fields);
+                    copy.add(field);
+                    annotationListHashMap.put(annotation, copy);
+                }
+            }
+        }
+
+        /**
+         * Check if annotation @AutoIncrement appears more than one
+         */
+        if (annotationListHashMap.containsKey(AutoIncrement.class.getName())) {
+            if (annotationListHashMap.get(AutoIncrement.class.getName()).size() > 1) {
+                throw new IllegalArgumentException("AutoIncrement annotation not allowed more than one");
+            }
+        }
+
+        /**
+         * Check if annotation @PrimaryKey appears more than one
+         */
+        if (annotationListHashMap.containsKey(PrimaryKey.class.getName())) {
+            if (annotationListHashMap.get(PrimaryKey.class.getName()).size() > 1) {
+                throw new IllegalArgumentException("PrimaryKey annotation not allowed more than one");
+            }
+        }
+
+        /**
+         * Check if annotation @Unique appears more than one
+         */
+        if (annotationListHashMap.containsKey(Unique.class.getName())) {
+            if (annotationListHashMap.get(Unique.class.getName()).size() > 1) {
+                throw new IllegalArgumentException("Unique annotation not allowed more than one");
+            }
+        }
+
+        /**
+         * Check if PrimaryKey AutoIncrement fields are different
+         */
+        if (annotationListHashMap.containsKey(AutoIncrement.class.getName())) {
+            Field autoIncrementedField = annotationListHashMap.get(AutoIncrement.class.getName()).get(0);
+            if (annotationListHashMap.containsKey(PrimaryKey.class.getName())) {
+                Field primaryKeyField = annotationListHashMap.get(PrimaryKey.class.getName()).get(0);
+                if (!autoIncrementedField.getName().equals(primaryKeyField.getName())) {
+                    throw new IllegalArgumentException("AutoIncremented field should be PrimaryKey field");
+                }
+            }
+        }
+        return fieldListHashMap;
     }
 
     /**
