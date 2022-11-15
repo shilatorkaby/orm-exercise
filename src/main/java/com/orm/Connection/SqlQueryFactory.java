@@ -148,15 +148,12 @@ public class SqlQueryFactory {
         return query;
     }
 
-    /**
-     * ADD Functionality
-     */
-    // TODO: Add a single item to a table
     public static <T> String createAddSingleItemToTableQuery(T t) {
         String tableName = t.getClass().getSimpleName().toLowerCase();
         String query = "INSERT INTO " + tableName + getValues(t);
         return query;
     }
+
     public static <T> String getValues(T t) {
         StringBuilder values = new StringBuilder(" VALUES (");
         Field[] declaredFields = t.getClass().getDeclaredFields();
@@ -183,10 +180,6 @@ public class SqlQueryFactory {
         return values.toString();
     }
 
-    /**
-     * UPDATE Functionality
-     */
-    // TODO: Update an entire item
     public static <T> String createUpdateItemQuery(Class<T> clz, T object, int id) {
         String tableName = clz.getSimpleName().toLowerCase();
         String query = "UPDATE " + tableName + " SET ";
@@ -210,7 +203,6 @@ public class SqlQueryFactory {
         return query + ";";
     }
 
-    // TODO: Update a single property of a single item (update email for user with id x)
     public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property, int id) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
@@ -219,10 +211,6 @@ public class SqlQueryFactory {
         return query;
     }
 
-    /**
-     * Delete Functionality
-     */
-    // TODO: Single item deletion by any property (delete user with email x)
     public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
@@ -230,15 +218,12 @@ public class SqlQueryFactory {
         return query;
     }
 
-    // TODO Multiple item deletion by any property (delete all users called x)
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
         return "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty;
     }
 
-
-    // TODO Delete entire table (truncate)
     public static <T> String createDeleteTableQuery(Class<T> clz) {
         String tableName = clz.getSimpleName().toLowerCase();
         String query = "DROP TABLE IF EXISTS " + tableName;
