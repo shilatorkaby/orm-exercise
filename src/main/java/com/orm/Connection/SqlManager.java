@@ -45,7 +45,9 @@ public class SqlManager {
     }
 
 
-    // TODO: Need to add checking if list is empty
+    /**
+     * Need to add checking if list is empty
+     */
     public static <T> List<T> findAll(Class<T> clz, String propertyName, Object property) {
         logger.info("start Find All according to property name and value");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -89,7 +91,8 @@ public class SqlManager {
                 Field[] declaredFields = clz.getDeclaredFields(); //list of fields
                 for (Field field : declaredFields) {
                     field.setAccessible(true); //turn to public
-                    if (rs.getObject(field.getName()).toString().contains("{")) {
+                    if (rs.getObject(field.getName()) != null
+                            && rs.getObject(field.getName()).toString().contains("{")) {
                         Gson g = new Gson();
                         field.set(item, g.fromJson(rs.getObject(field.getName()).toString(), field.getType()));
                     } else {
@@ -111,8 +114,8 @@ public class SqlManager {
 
     /**
      * ADD Functionality
+     * Add a single item to a table
      */
-    //TODO: Add a single item to a table
     public static <T> T addSingleItem(T item) {
         logger.info("start adding single item");
         addMultipleItems(item);
@@ -136,8 +139,9 @@ public class SqlManager {
         return items;
     }
 
-    //TODO: Update a single property of a single item (update email for user with id x)
-
+    /**
+     * Update a single property of a single item (update email for user with id x)
+     */
     public static <T> int updatePropertyById(Class<T> clz, String propertyName, Object property, int id) {
         logger.info("start updating property by id");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -154,7 +158,9 @@ public class SqlManager {
         }
     }
 
-    //TODO: Update an entire item
+    /**
+     * Update an entire item
+     */
     public static <T> int updateEntireItem(Class<T> clz, T object, int id) {
         logger.info("start update entire item");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -172,8 +178,8 @@ public class SqlManager {
 
     /**
      * Delete Functionality
+     * Single item deletion by any property (delete user with email x)
      */
-    //TODO: Single item deletion by any property (delete user with email x)
     public static <T> int deleteSingleItemByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting single item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -188,7 +194,9 @@ public class SqlManager {
         }
     }
 
-    //TODO Multiple item deletion by any property (delete all users called x)
+    /**
+     * Multiple item deletion by any property (delete all users called x)
+     */
     public static <T> int deleteItemsByProperty(Class<T> clz, String propertyName, Object property) {
         logger.info("start deleting item by property");
         try (java.sql.Connection con = ConnectionFacade.getConnection()) {
@@ -203,7 +211,9 @@ public class SqlManager {
         }
     }
 
-    //TODO Delete entire table (truncate)
+    /**
+     * Delete entire table (truncate)
+     */
     public static <T> int deleteTable(Class<T> clz) {
         //check if table is there if yes delete else do nothing.
         logger.info("start deleting table");
@@ -218,6 +228,4 @@ public class SqlManager {
             throw new RuntimeException(e);
         }
     }
-
-
 }

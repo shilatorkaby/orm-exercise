@@ -1,9 +1,11 @@
 package com.orm.Connection;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.orm.Annotation.AutoIncrement;
 import com.orm.Annotation.PrimaryKey;
 import com.orm.Annotation.Unique;
+import com.orm.Utils.EntityAnnotationsValidator;
 import com.orm.Utils.JavaToSqlTypeMapper;
 
 import java.lang.reflect.Field;
@@ -25,7 +27,8 @@ public class SqlQueryFactory {
         StringBuilder sqlColumns = new StringBuilder();
 
         Field[] declaredFields = clz.getDeclaredFields();
-        LinkedHashMap<Field, List<String>> fieldListHashMap = validateAnnotations(declaredFields);
+        LinkedHashMap<Field, List<String>> fieldListHashMap =
+                EntityAnnotationsValidator.validateAnnotations(declaredFields);
         String primaryKey = null, unique = null;
         int i = 0;
         for (Map.Entry<Field, List<String>> entry : fieldListHashMap.entrySet()) {
@@ -64,75 +67,6 @@ public class SqlQueryFactory {
         return sqlColumns.toString();
     }
 
-    private static LinkedHashMap<Field, List<String>> validateAnnotations(Field[] declaredFields) {
-        // <PrimaryKey, [id, name]>
-        HashMap<String, List<Field>> annotationListHashMap = new HashMap<>();
-
-        //<id, [PrimaryKey, AutoIncrement]>
-        LinkedHashMap<Field, List<String>> fieldListHashMap = new LinkedHashMap<>();
-
-        for (Field field : declaredFields) {
-            List<String> annotations = Arrays.stream(field.getAnnotations())
-                    .map(annotation -> annotation.annotationType().getName())
-                    .collect(Collectors.toList());
-            fieldListHashMap.put(field, annotations);
-            for (String annotation : annotations) {
-                if (!annotationListHashMap.containsKey(annotation)) {
-                    annotationListHashMap.put(annotation, List.of(field));
-                } else {
-                    List<Field> fields = annotationListHashMap.get(annotation);
-                    List<Field> copy = new ArrayList<>(fields);
-                    copy.add(field);
-                    annotationListHashMap.put(annotation, copy);
-                }
-            }
-        }
-
-        /**
-         * Check if annotation @AutoIncrement appears more than one
-         */
-        if (annotationListHashMap.containsKey(AutoIncrement.class.getName())) {
-            if (annotationListHashMap.get(AutoIncrement.class.getName()).size() > 1) {
-                throw new IllegalArgumentException("AutoIncrement annotation not allowed more than one");
-            }
-        }
-
-        /**
-         * Check if annotation @PrimaryKey appears more than one
-         */
-        if (annotationListHashMap.containsKey(PrimaryKey.class.getName())) {
-            if (annotationListHashMap.get(PrimaryKey.class.getName()).size() > 1) {
-                throw new IllegalArgumentException("PrimaryKey annotation not allowed more than one");
-            }
-        }
-
-        /**
-         * Check if annotation @Unique appears more than one
-         */
-        if (annotationListHashMap.containsKey(Unique.class.getName())) {
-            if (annotationListHashMap.get(Unique.class.getName()).size() > 1) {
-                throw new IllegalArgumentException("Unique annotation not allowed more than one");
-            }
-        }
-
-        /**
-         * Check if PrimaryKey AutoIncrement fields are different
-         */
-        if (annotationListHashMap.containsKey(AutoIncrement.class.getName())) {
-            Field autoIncrementedField = annotationListHashMap.get(AutoIncrement.class.getName()).get(0);
-            if (annotationListHashMap.containsKey(PrimaryKey.class.getName())) {
-                Field primaryKeyField = annotationListHashMap.get(PrimaryKey.class.getName()).get(0);
-                if (!autoIncrementedField.getName().equals(primaryKeyField.getName())) {
-                    throw new IllegalArgumentException("AutoIncremented field should be PrimaryKey field");
-                }
-            }
-        }
-        return fieldListHashMap;
-    }
-
-    /**
-     * Read Functionality
-     */
     public static <T> String createFindAllQuery(Class<T> clz) {
         return "SELECT * FROM " + clz.getSimpleName().toLowerCase() + ";";
     }
@@ -148,15 +82,12 @@ public class SqlQueryFactory {
         return query;
     }
 
-    /**
-     * ADD Functionality
-     */
-    // TODO: Add a single item to a table
     public static <T> String createAddSingleItemToTableQuery(T t) {
         String tableName = t.getClass().getSimpleName().toLowerCase();
         String query = "INSERT INTO " + tableName + getValues(t);
         return query;
     }
+
     public static <T> String getValues(T t) {
         StringBuilder values = new StringBuilder(" VALUES (");
         Field[] declaredFields = t.getClass().getDeclaredFields();
@@ -166,9 +97,9 @@ public class SqlQueryFactory {
                 Object o = declaredFields[i].get(t);
                 if (o instanceof String) {
                     values.append(String.format("\'%s\'", o));
-                } else if (JavaToSqlTypeMapper.nonPrimitiveType(o.getClass().getSimpleName())) {
+                } else if (o != null && JavaToSqlTypeMapper
+                        .nonPrimitiveType(o.getClass().getSimpleName())) {
                     values.append("'" + new Gson().toJson(o) + "'");
-                    System.out.println(new Gson().toJson(o));
                 } else {
                     values.append(o);
                 }
@@ -183,34 +114,32 @@ public class SqlQueryFactory {
         return values.toString();
     }
 
-    /**
-     * UPDATE Functionality
-     */
-    // TODO: Update an entire item
     public static <T> String createUpdateItemQuery(Class<T> clz, T object, int id) {
         String tableName = clz.getSimpleName().toLowerCase();
-        String query = "UPDATE " + tableName + " SET ";
+        StringBuilder query = new StringBuilder("UPDATE " + tableName + " SET ");
         Field[] declaredFields = clz.getDeclaredFields(); //list of fields
         for (Field field : declaredFields) {
             field.setAccessible(true); //turn to public
-            query += (field.getName() + " = ");
+            query.append(field.getName() + " = ");
             try {
                 Object value = field.get(object);
-                if (value instanceof String)
-                    query += ("'" + value + "'" + ",");
-                else
-                    query += (value + ",");
-
+                if (value instanceof String) {
+                    query.append("'" + value + "', ");
+                } else if (value != null && JavaToSqlTypeMapper
+                        .nonPrimitiveType(value.getClass().getSimpleName())) {
+                    query.append("'" + new Gson().toJson(value) + "', ");
+                } else {
+                    query.append(value + ", ");
+                }
             } catch (IllegalAccessException e) {
-                throw new RuntimeException("Field value was empty");
+                throw new RuntimeException(e);
             }
         }
-        query = query.substring(0, query.length() - 1);
-        query += (" WHERE id = " + id);
-        return query + ";";
+        String subQuery = query.substring(0, query.length() - 1);
+        String res = subQuery +" WHERE id = " + id + ";";
+        return res;
     }
 
-    // TODO: Update a single property of a single item (update email for user with id x)
     public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property, int id) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
@@ -219,10 +148,6 @@ public class SqlQueryFactory {
         return query;
     }
 
-    /**
-     * Delete Functionality
-     */
-    // TODO: Single item deletion by any property (delete user with email x)
     public static <T> String createDeleteSingleItemByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
@@ -230,15 +155,16 @@ public class SqlQueryFactory {
         return query;
     }
 
-    // TODO Multiple item deletion by any property (delete all users called x)
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
+        if (JavaToSqlTypeMapper.nonPrimitiveType(property.getClass().getSimpleName())) {
+            Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+            stringProperty = gson.toJson(property, property.getClass());
+        }
         return "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty;
     }
 
-
-    // TODO Delete entire table (truncate)
     public static <T> String createDeleteTableQuery(Class<T> clz) {
         String tableName = clz.getSimpleName().toLowerCase();
         String query = "DROP TABLE IF EXISTS " + tableName;

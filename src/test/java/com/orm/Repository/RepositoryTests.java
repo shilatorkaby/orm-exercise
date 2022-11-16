@@ -1,12 +1,16 @@
 package com.orm.Repository;
 
+import com.orm.Annotation.AutoIncrement;
+import com.orm.Annotation.PrimaryKey;
 import com.orm.Entity.Car;
+import com.orm.Entity.Name;
 import com.orm.Entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,10 +63,8 @@ public class RepositoryTests {
 
         List<User> userList = new ArrayList<User>(Arrays.asList(user2, user1));
 
-//        assertDoesNotThrow(() -> repo.findAll());
         assertEquals(userList.toString(), repoTest.findAll().toString());
         repoTest.deleteTable();
-
     }
 
 //    @Test
@@ -133,7 +135,7 @@ public class RepositoryTests {
 
     @Test
     void saveSingleItem_WrongItem_Exception() {
-        assertThrows(Exception.class, () -> repo.save((User) null));
+        assertThrows(IllegalArgumentException.class, () -> repo.save((User) null));
     }
 
     @Test
@@ -258,9 +260,9 @@ public class RepositoryTests {
         user2.setId(11);
         user2.setName("khader");
         repo.save(user2);
+        Name name = new Name("khader", "khader");
 
-
-        assertTrue(0 < repo.deleteItemsByProperty("name", "khader"));
+        assertTrue(0 < repo.deleteItemsByProperty("name", name));
         assertThrows(Exception.class, () -> repo.getItemById(11));
     }
 
@@ -291,9 +293,5 @@ public class RepositoryTests {
     void deleteTable_nullClass_Exception() {
         repo.deleteTable();
         assertEquals(0, repo.deleteTable());
-
-
     }
-
-
 }
