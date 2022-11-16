@@ -14,6 +14,13 @@ public class User {
     String email;
     String password;
 
+    public User() {
+        this.id = ThreadLocalRandom.current().nextInt(100000000,999999999);
+        Name name= new Name("shilat","orkaby");
+        this.name = name;
+        this.email = name.getFirstName();
+        this.password = name.getLastName();
+    }
 
     public String getEmail() {
         return email;

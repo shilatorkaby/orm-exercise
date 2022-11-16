@@ -135,8 +135,8 @@ public class SqlQueryFactory {
                 throw new RuntimeException(e);
             }
         }
-        String subQuery = query.substring(0, query.length() - 1);
-        String res = subQuery +" WHERE id = " + id + ";";
+       // String subQuery = query.substring(0, query.length() - 1);
+        String res = query.substring(0,query.length()-2) +" WHERE id = " + id + ";";
         return res;
     }
 
