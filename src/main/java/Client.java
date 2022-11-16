@@ -13,5 +13,6 @@ public class Client {
         users.save(user1);
         List<User> userList = users.findAll();
         System.out.println(userList);
+        System.out.println(SqlQueryFactory.createUpdateItemQuery(User.class,user1,user1.getId()));
     }
 }

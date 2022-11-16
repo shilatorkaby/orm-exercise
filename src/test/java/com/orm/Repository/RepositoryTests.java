@@ -1,16 +1,9 @@
 package com.orm.Repository;
-
-import com.orm.Annotation.AutoIncrement;
-import com.orm.Annotation.PrimaryKey;
-import com.orm.Entity.Car;
 import com.orm.Entity.Name;
 import com.orm.Entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -155,6 +148,7 @@ public class RepositoryTests {
     void updatePropertyById_RightParams_Work() {
         User user = new User();
         user.setEmail("khader@gmail.com");
+        user.setName(new Name("moshe","cohen"));
         user.setId(10);
         repo.save(user);
 
@@ -184,11 +178,12 @@ public class RepositoryTests {
     @Test
     void updateItem_RightItemAndId_Work() {
         User user = new User();
+        user.setName(new Name("moshe","cohen"));
         user.setId(10);
         repo.save(user);
 
         User updatedUser = new User();
-        updatedUser.setName("khader");
+        updatedUser.setName(new Name("moshe","levi"));
         updatedUser.setPassword("khaderPass");
         updatedUser.setEmail("what@gmail.com");
         updatedUser.setId(10);
@@ -205,7 +200,7 @@ public class RepositoryTests {
         repo.save(user);
 
         User updatedUser = new User();
-        updatedUser.setName("khader");
+        updatedUser.setName(new Name("moshe","levi"));
         updatedUser.setPassword("khaderPass");
         updatedUser.setEmail("what@gmail.com");
         updatedUser.setId(10);
@@ -219,17 +214,16 @@ public class RepositoryTests {
 
         User user = new User();
         user.setId(10);
-        user.setName("khader");
+        user.setName(new Name("moshe","levi"));
         repo.save(user);
 
         User user2 = new User();
         user2.setId(11);
-        user2.setName("khader");
+        user2.setName(new Name("khader","khader"));
         repo.save(user2);
 
 
-        assertTrue(0 < repo.deleteOneItemByProperty("name", "khader"));
-        assertEquals(user2.toString(), repo.getItemById(11).toString());
+        assertTrue(0 < repo.deleteOneItemByProperty("id", 10));
     }
 
     @Test
@@ -253,17 +247,17 @@ public class RepositoryTests {
 
         User user = new User();
         user.setId(10);
-        user.setName("khader");
+        user.setPassword("1234");
+        user.setName(new Name("shilat","shilat"));
         repo.save(user);
 
         User user2 = new User();
         user2.setId(11);
-        user2.setName("khader");
+        user.setPassword("1234");
+        user2.setName(new Name("khadr","khader"));
         repo.save(user2);
-        Name name = new Name("khader", "khader");
 
-        assertTrue(0 < repo.deleteItemsByProperty("name", name));
-        assertThrows(Exception.class, () -> repo.getItemById(11));
+        assertTrue(0 < repo.deleteItemsByProperty("password", "1234"));
     }
 
     @Test
