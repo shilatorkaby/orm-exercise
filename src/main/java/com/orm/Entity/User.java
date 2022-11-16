@@ -1,36 +1,18 @@
 package com.orm.Entity;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import com.github.javafaker.Faker;
 import com.orm.Annotation.AutoIncrement;
 import com.orm.Annotation.PrimaryKey;
-import com.orm.Annotation.Unique;
-//import com.github.javafaker.Name;
 
 public class User {
 
 
-    @PrimaryKey
-    @AutoIncrement
+//    @PrimaryKey
+//    @AutoIncrement
     int id;
     Name name;
     String email;
     String password;
-
-
-
-    public User() {
-        name = new Name("shilat", "orkaby");
-        email = name.firstName +
-                ThreadLocalRandom.current().nextInt(100, 299 + 1)+"@gmail.com";
-        password = name.firstName +
-                ThreadLocalRandom.current().nextInt(10000, 99999);
-    }
 
 
     public String getEmail() {
@@ -53,6 +35,9 @@ public class User {
         this.name = new Name(name.getFirstName(),name.getLastName());
     }
 
+    public void setName(String name) {
+        this.name = new Name(name, name);
+    }
 
     public int getId() {
         return id;

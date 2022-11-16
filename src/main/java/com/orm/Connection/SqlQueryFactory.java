@@ -1,6 +1,7 @@
 package com.orm.Connection;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.orm.Annotation.AutoIncrement;
 import com.orm.Annotation.PrimaryKey;
 import com.orm.Annotation.Unique;
@@ -96,9 +97,9 @@ public class SqlQueryFactory {
                 Object o = declaredFields[i].get(t);
                 if (o instanceof String) {
                     values.append(String.format("\'%s\'", o));
-                } else if (JavaToSqlTypeMapper.nonPrimitiveType(o.getClass().getSimpleName())) {
+                } else if (o != null && JavaToSqlTypeMapper
+                        .nonPrimitiveType(o.getClass().getSimpleName())) {
                     values.append("'" + new Gson().toJson(o) + "'");
-                    System.out.println(new Gson().toJson(o));
                 } else {
                     values.append(o);
                 }
@@ -115,25 +116,28 @@ public class SqlQueryFactory {
 
     public static <T> String createUpdateItemQuery(Class<T> clz, T object, int id) {
         String tableName = clz.getSimpleName().toLowerCase();
-        String query = "UPDATE " + tableName + " SET ";
+        StringBuilder query = new StringBuilder("UPDATE " + tableName + " SET ");
         Field[] declaredFields = clz.getDeclaredFields(); //list of fields
         for (Field field : declaredFields) {
             field.setAccessible(true); //turn to public
-            query += (field.getName() + " = ");
+            query.append(field.getName() + " = ");
             try {
                 Object value = field.get(object);
-                if (value instanceof String)
-                    query += ("'" + value + "'" + ",");
-                else
-                    query += (value + ",");
-
+                if (value instanceof String) {
+                    query.append("'" + value + "', ");
+                } else if (value != null && JavaToSqlTypeMapper
+                        .nonPrimitiveType(value.getClass().getSimpleName())) {
+                    query.append("'" + new Gson().toJson(value) + "', ");
+                } else {
+                    query.append(value + ", ");
+                }
             } catch (IllegalAccessException e) {
-                throw new RuntimeException("Field value was empty");
+                throw new RuntimeException(e);
             }
         }
-        query = query.substring(0, query.length() - 1);
-        query += (" WHERE id = " + id);
-        return query + ";";
+        String subQuery = query.substring(0, query.length() - 1);
+        String res = subQuery +" WHERE id = " + id + ";";
+        return res;
     }
 
     public static <T> String createUpdateByIdQuery(Class<T> clz, String propertyName, Object property, int id) {
@@ -154,6 +158,10 @@ public class SqlQueryFactory {
     public static <T> String createDeleteItemsByPropertyQuery(Class<T> clz, String propertyName, Object property) {
         String tableName = clz.getSimpleName().toLowerCase();
         String stringProperty = convertIfString(property);
+        if (JavaToSqlTypeMapper.nonPrimitiveType(property.getClass().getSimpleName())) {
+            Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+            stringProperty = gson.toJson(property, property.getClass());
+        }
         return "DELETE FROM " + tableName + " WHERE " + propertyName + " = " + stringProperty;
     }
 

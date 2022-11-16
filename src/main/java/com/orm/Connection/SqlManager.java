@@ -91,7 +91,8 @@ public class SqlManager {
                 Field[] declaredFields = clz.getDeclaredFields(); //list of fields
                 for (Field field : declaredFields) {
                     field.setAccessible(true); //turn to public
-                    if (rs.getObject(field.getName()).toString().contains("{")) {
+                    if (rs.getObject(field.getName()) != null
+                            && rs.getObject(field.getName()).toString().contains("{")) {
                         Gson g = new Gson();
                         field.set(item, g.fromJson(rs.getObject(field.getName()).toString(), field.getType()));
                     } else {
